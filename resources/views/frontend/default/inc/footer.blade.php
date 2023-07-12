@@ -1,30 +1,40 @@
-<div class="footer-curve position-relative overflow-hidden">
+<style>
+    .footer-widget ul li a:hover{
+        color: #ff7c08;
+        font-weight: 700 !important;
+    }
+    @media only screen and (max-width: 560px) {      
+    #footer_content{
+       text-align: center !important;
+    }
+    }
+</style>
+{{-- <div class="footer-curve position-relative overflow-hidden">
     <span class="position-absolute section-curve-wrapper top-0 h-100"
         data-background="{{ staticAsset('frontend/default/assets/img/shapes/section-curve.png') }}"></span>
-</div>
+</div> --}}
 
-<footer class="gshop-footer position-relative pt-8 bg-dark z-1 overflow-hidden">
-    <img src="{{ staticAsset('frontend/default/assets/img/shapes/tomato.svg') }}" alt="tomato"
-        class="position-absolute z--1 tomato vector-shape">
+<footer class="gshop-footer position-relative z-1 overflow-hidden" style="background-color: #6eb356;">
+ 
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/pata-lg.svg') }}" alt="pata"
         class="position-absolute z--1 pata-lg vector-shape">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/pata-xs.svg') }}" alt="pata"
         class="position-absolute z--1 pata-xs vector-shape">
-    <img src="{{ staticAsset('frontend/default/assets/img/shapes/frame-circle.svg') }}" alt="frame"
-        class="position-absolute z--1 frame-circle vector-shape">
+    {{-- <img src="{{ staticAsset('frontend/default/assets/img/shapes/frame-circle.svg') }}" alt="frame" --}}
+        {{-- class="position-absolute z--1 frame-circle vector-shape"> --}}
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/leaf.svg') }}" alt="leaf"
         class="position-absolute z--1 leaf vector-shape">
     <!--shape right -->
-    <img src="{{ staticAsset('frontend/default/assets/img/shapes/leaf.svg') }}" alt="pata"
-        class="position-absolute leaf-2 z--1 vector-shape">
+    {{-- <img src="{{ staticAsset('frontend/default/assets/img/shapes/84776-tree.svg') }}" alt="tree"
+        class="position-absolute leaf-2 z--1 vector-shape"> --}}
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/pata-xs.svg') }}" alt="pata"
         class="position-absolute pata-xs-2 z--1 vector-shape">
-    <img src="{{ staticAsset('frontend/default/assets/img/shapes/tomato-slice.svg') }}" alt="tomato slice"
-        class="position-absolute tomato-slice vector-shape z--1">
-    <img src="{{ staticAsset('frontend/default/assets/img/shapes/tomato-half.svg') }}" alt="tomato"
-        class="position-absolute tomato-half z--1 vector-shape">
+    {{-- <img src="{{ staticAsset('frontend/default/assets/img/shapes/tomato-slice.svg') }}" alt="tomato slice" --}}
+        {{-- class="position-absolute tomato-slice vector-shape z--1"> --}}
+    {{-- <img src="{{ staticAsset('frontend/default/assets/img/shapes/tomato-half.svg') }}" alt="tomato" --}}
+        {{-- class="position-absolute tomato-half z--1 vector-shape"> --}}
     <div class="container">
-        <div class="row justify-content-center">
+        {{-- <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6">
                 <div class="gshop_subscribe_form text-center">
                     <h4 class="text-white gshop-title">{{ localize('Subscribe to the us') }}<mark
@@ -38,13 +48,13 @@
                         <input type="email" class="form-control" placeholder="{{ localize('Enter Email Address') }}"
                             type="email" name="email" required>
                         <button type="submit"
-                            class="btn btn-primary flex-shrink-0">{{ localize('Subscribe Now') }}</button>
+                            class="btn btn-primary flex-shrink-0" style="background-color: #ff7c08">{{ localize('Subscribe Now') }}</button>
                     </form>
                 </div>
             </div>
-        </div>
-        <span class="gradient-spacer my-8 d-block"></span>
-        <div class="row g-5">
+        </div> --}}
+        {{-- <span class="gradient-spacer my-8 d-block"></span> --}}
+        <div class="row g-5 mt-1" id="footer_content">
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                 <div class="footer-widget">
                     <h5 class="text-white mb-4">{{ localize('Category') }}</h5>
@@ -98,12 +108,22 @@
                         <li class="text-white pb-2 fs-xs">{{ getSetting('navbar_contact_number') }}</li>
                         <li class="text-white pb-2 fs-xs">{{ getSetting('topbar_email') }}</li>
                     </ul>
-                </div>
-            </div>
+                </div>  
+
+                <form class="mt-10 d-flex align-items-center bg-white rounded subscribe_form"
+                    action="{{ route('subscribe.store') }}" method="POST">
+                    @csrf
+                    <input type="email" class="form-control" placeholder="{{ localize('Enter Email') }}"
+                        type="email" name="email" style="padding: 10px 1% !important" required>
+                    <button type="submit"
+                        class="btn btn-primary flex-shrink-0"  style="height:46px;background-color: #ff7c08;font-size:15px;padding:10px 1% !important">{{ localize('Subscribe Now') }}</button>
+                </form>
+                          
+            </div>           
         </div>
     </div>
-    <div class="footer-copyright pt-120 pb-3">
-        <span class="gradient-spacer d-block mb-3"></span>
+    <div class="footer-copyright pt-10 pb-3">
+        <span class="gradient-spacer d-block mb-3 mt-3"></span>
         <div class="container">
             <div class="row align-items-center g-3">
                 <div class="col-lg-4">
@@ -113,9 +133,11 @@
                 </div>
                 <div class="col-lg-4 d-none d-lg-block">
                     <div class="logo-wrapper text-center">
-                        <a href="{{ route('home') }}" class="logo"><img
+                        <a href="{{ route('home') }}" class="logo">
+                            <img
                                 src="{{ uploadedAsset(getSetting('footer_logo')) }}" alt="footer logo"
-                                class="img-fluid"></a>
+                                class="img-fluid" width="25%">
+                            </a>
                     </div>
                 </div>
                 <div class="col-lg-4">
