@@ -1,8 +1,16 @@
+
+<style>
+    @media only screen and (max-width: 960px) {      
+    .product-listing-box{
+        padding: 0% !important;
+    }
+    }
+</style>
 <section class="pt-80 pb-120">
     <div class="container">
         <div class="row justify-content-center g-4">
             <!--New Products-->
-            <div class="col-xxl-4 col-lg-6">
+            <div class="col-4 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-6">
                 <div class="product-listing-box bg-white rounded-2">
                     <div class="d-flex align-items-center justify-content-between gap-3 mb-5 flex-wrap">
                         <h4 class="mb-0">{{ localize('New Products') }}</h4>
@@ -23,7 +31,7 @@
             </div>
             <!--New Products-->
 
-            <div class="col-xxl-4 col-lg-6">
+            <div class="col-4 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-6">
                 <div class="product-listing-box bg-white rounded-2">
                     <div class="d-flex align-items-center justify-content-between gap-3 mb-5 flex-wrap">
                         <h4 class="mb-0">{{ localize('Best Selling') }}</h4>
@@ -45,7 +53,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 d-none d-xl-block d-none-1399">
+            <div class="col-4 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 d-none d-xl-block">
                 <a href="{{ getSetting('best_selling_banner_link') }}" class=""><img
                         src="{{ uploadedAsset(getSetting('best_selling_banner')) }}" alt=""
                         class="img-fluid rounded-2 d-flex flex-column h-100"></a>
