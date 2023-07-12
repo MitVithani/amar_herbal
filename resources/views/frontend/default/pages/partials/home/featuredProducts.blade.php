@@ -1,7 +1,7 @@
-<section class="featured-products pt-120 pb-200 bg-shade position-relative overflow-hidden z-1">
-    <img src="{{ staticAsset('frontend/default/assets/img/shapes/roll-1.png') }}" alt="roll"
+<section class="featured-products pt-80 pb-50 bg-shade position-relative overflow-hidden z-1">
+    <img src="{{ staticAsset('frontend/default/assets/img/shapes/pata-xs.svg') }}" alt="roll"
         class="position-absolute roll-1 z--1" data-parallax='{"y": -120}'>
-    <img src="{{ staticAsset('frontend/default/assets/img/shapes/roll-2.png') }}" alt="roll"
+    <img src="{{ staticAsset('frontend/default/assets/img/shapes/pata-xs.svg') }}" alt="roll"
         class="position-absolute roll-2 z--1" data-parallax='{"y": 120}'>
     <div class="container">
         <div class="row justify-content-center">
@@ -19,7 +19,7 @@
                 $left_products = \App\Models\Product::whereIn('id', $featured_products_left)->get();
             @endphp
 
-            <div class="col-xxl-4 col-lg-6">
+            <div class="col-4 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12">
                 @foreach ($left_products as $product)
                     <div class="{{ !$loop->last ? 'mb-3' : '' }}">
                         @include('frontend.default.pages.partials.products.horizontal-product-card', [
@@ -28,16 +28,7 @@
                         ])
                     </div>
                 @endforeach
-            </div>
-
-            <!-- banner -->
-            <div class="col-xxl-4 col-lg-6 order-3 order-xxl-2 d-none d-xl-block d-none-1399">
-                <div class="product-card-lg bg-light rounded-2 d-flex flex-column h-100">
-                    <a href="{{ getSetting('featured_banner_link') }}" class="my-auto">
-                        <img src="{{ uploadedAsset(getSetting('featured_center_banner')) }}" alt="">
-                    </a>
-                </div>
-            </div>
+            </div>          
 
             <!-- right column -->
             @php
@@ -46,7 +37,7 @@
             @endphp
 
 
-            <div class="col-xxl-4 col-lg-6 order-2 order-xxl-3">
+            <div class="col-4 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12" >
                 @foreach ($right_products as $product)
                     <div class="{{ !$loop->last ? 'mb-3' : '' }}">
                         @include('frontend.default.pages.partials.products.horizontal-product-card', [
@@ -57,6 +48,16 @@
                 @endforeach
 
             </div>
+
+             <!-- banner -->
+             <div class="col-4 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 d-none d-xl-block">
+                <div class="h-100">
+                    <a href="{{ getSetting('featured_banner_link') }}">
+                        <img src="{{ uploadedAsset(getSetting('featured_center_banner')) }}" class="img-fluid rounded-2 d-flex flex-column h-100" alt="">
+                    </a>
+                </div>
+            </div>
+            
         </div>
     </div>
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/bg-shape-2.png') }}" alt="bg shape"
