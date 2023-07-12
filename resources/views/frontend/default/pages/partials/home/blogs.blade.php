@@ -1,4 +1,4 @@
-<section class="blog-section pb-120">
+{{-- <section class="blog-section pb-120">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-5">
@@ -39,4 +39,4 @@
 
         </div>
     </div>
-</section>
+</section> --}}
