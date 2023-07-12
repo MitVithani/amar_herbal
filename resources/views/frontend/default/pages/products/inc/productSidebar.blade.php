@@ -1,7 +1,7 @@
 <div class="gshop-sidebar bg-white rounded-2 overflow-hidden">
     <!--Filter by search-->
     <div class="sidebar-widget search-widget bg-white py-5 px-4">
-        <div class="widget-title d-flex">
+        {{--        <div class="widget-title d-flex">
             <h6 class="mb-0 flex-shrink-0">{{ localize('Search Now') }}</h6>
             <span class="hr-line w-100 position-relative d-block align-self-end ms-1"></span>
         </div>
@@ -14,8 +14,32 @@
                 placeholder="{{ localize('Search') }}">
             <button type="submit" class="submit-icon-btn-secondary"><i
                     class="fa-solid fa-magnifying-glass"></i></button>
+        </div>--}}
+
+        <div class="select-filter d-inline-flex align-items-center gap-3">
+            <label
+                class="fw-bold fs-xs text-dark flex-shrink-0">{{ localize('Sort by') }}:</label>
+            <select name="sort_by"
+                class="sort_by form-select fs-xxs fw-medium theme-select select-sm">
+                <option value="new"
+                    @isset($sort_by)
+                    @if ($sort_by == 'new')
+                    selected
+                    @endif
+                @endisset>
+                    {{ localize('Newest First') }}</option>
+                <option value="best_selling"
+                    @isset($sort_by)
+                @if ($sort_by == 'best_selling')
+                selected
+                @endif
+            @endisset>
+                    {{ localize('Best Selling') }}</option>
+            </select>
         </div>
-    </div>
+    </div> 
+
+    
     <!--Filter by search-->
     <!--Filter by Categories-->
     <div class="sidebar-widget category-widget bg-white py-5 px-4 border-top mobile-menu-wrapper scrollbar h-400px">
