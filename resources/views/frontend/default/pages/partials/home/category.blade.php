@@ -1,4 +1,16 @@
-<section class="gshop-category-section bg-white pt-120 position-relative z-1 overflow-hidden">
+<style>
+    .myclass{
+        display: flex !important;
+        /* justify-content: space-evenly !important; */
+        /* align-items: flex-start !important; */
+    }
+    @media only screen and (max-width: 960px) {      
+    #mycol{
+        padding: 0% !important;
+    }
+    }
+</style>
+<section class="gshop-category-section bg-white pt-100 position-relative z-1 overflow-hidden">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/bg-shape.png') }}" alt="bg shape"
         class="position-absolute bottom-0 start-0 w-100 z--1">
     <div class="container">
@@ -6,7 +18,7 @@
             <div class="text-center section-title">
                 <h4 class="d-inline-block px-2 bg-white mb-4">{{ localize('Our Top Categories') }}</h4>
             </div>
-            <div class="row justify-content-center g-4">
+            <div class="row g-4 myclass">
                 @php
                     $top_category_ids = getSetting('top_category_ids') != null ? json_decode(getSetting('top_category_ids')) : [];
                     $categories = \App\Models\Category::whereIn('id', $top_category_ids)->get();
@@ -16,11 +28,10 @@
                     @php
                         $productsCount = \App\Models\ProductCategory::where('category_id', $category->id)->count();
                     @endphp
-                    <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6">
-                        <div
-                            class="gshop-animated-iconbox py-5 px-4 text-center border rounded-3 position-relative overflow-hidden {{ $loop->even ? 'color-2' : '' }}">
-                            <div
-                                class="animated-icon d-inline-flex align-items-center justify-content-center rounded-circle position-relative">
+                    <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3" id="mycol">
+                        <a href="{{ route('products.index') }}?&category_id={{ $category->id }}">
+                        <div class="gshop-animated-iconbox text-center border rounded-3 position-relative overflow-hidden {{ $loop->even ? 'color-2' : '' }}">
+                            <div class="animated-icon d-inline-flex align-items-center rounded-circle position-relative">
                                 <img src="{{ uploadedAsset($category->collectLocalization('thumbnail_image')) }}"
                                     alt="" class="img-fluid">
                             </div>
@@ -34,6 +45,7 @@
                             <a href="{{ route('products.index') }}?&category_id={{ $category->id }}"
                                 class="explore-btn position-absolute"><i class="fa-solid fa-arrow-up"></i></a>
                         </div>
+                        </a>
                     </div>
                 @endforeach
             </div>

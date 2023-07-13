@@ -34,10 +34,10 @@
                 </div>
 
                 <div class="row g-3 mb-3">
-                    <div class="col-xl-9">
+                    <div class="col-xl-12">
                         <div class="row g-3">
                             <!-- total sales chart -->
-                            <div class="col-sm-6 col-md-4 col-lg-4">
+                            <div class="col-sm-6 col-md-3 col-lg-3">
                                 <div class="card h-100 flex-column">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center justify-content-between">
@@ -70,7 +70,7 @@
 
 
                             <!-- top 5 category sales chart -->
-                            <div class="col-sm-6 col-md-4 col-lg-4">
+                            <div class="col-sm-6 col-md-3 col-lg-3">
                                 <div class="card h-100 flex-column">
                                     <div class="card-body d-flex flex-column h-100">
                                         <span class="text-muted">{{ localize('Top 5 Category Sales') }}</span>
@@ -82,19 +82,31 @@
                             <!-- top 5 category sales chart -->
 
                             <!-- total order this month chart -->
-                            <div class="col-sm-6 col-md-4 col-lg-4 d-none d-lg-block d-md-block">
+                            <div class="col-sm-6 col-md-3 col-lg-3 d-none d-lg-block d-md-block">
                                 <div class="card h-100 flex-column">
-                                    <div class="card-body">
+                                    <div class="card-body d-flex flex-column h-100">
                                         <span class="text-muted">{{ localize('Last 30 Days Orders') }}</span>
                                         <h4 class="fw-bold">{{ $totalOrdersData->totalOrders }}</h4>
                                     </div>
                                     <div id="last30DaysOrders"></div>
                                 </div>
                             </div>
+
+                            <div class="col-sm-6 col-md-3 col-lg-3 d-none d-lg-block d-md-block">
+                                <div class="card h-100 flex-column">
+                                    <div class="card-body d-flex flex-column h-100">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <span class="text-muted">{{ localize('Sales This Months') }}</span>
+                                        </div>
+                                        <h4 class="fw-bold mb-0">{{ formatPrice($thisMonthSaleData->totalEarning) }}</h4>
+                                    </div>
+                                    <div id="thisMonthChart"></div>
+                                </div>
+                            </div>
                             <!-- total order this month chart -->
 
                             <!-- sales this month chart -->
-                            <div class="col-l2">
+                            {{-- <div class="col-l2">
                                 <div class="card">
                                     <div class="card-body pb-0">
                                         <div class="d-flex align-items-center justify-content-between">
@@ -104,15 +116,15 @@
                                     </div>
                                     <div id="thisMonthChart" class="px-3"></div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- sales this month chart -->
 
                         </div>
                     </div>
 
-                    <div class="col-xl-3">
+                    {{-- <div class="col-xl-3"> --}}
                         <!-- top selling products -->
-                        <div class="card h-100 flex-column">
+                        {{-- <div class="card h-100 flex-column">
                             <div class="card-body px-0">
                                 <div class="px-3">
                                     <h5 class="fw-bold mb-1">{{ localize('Top Selling Products') }}</h5>
@@ -152,12 +164,12 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- top selling products -->
-                    </div>
+                    {{-- </div> --}}
                 </div>
 
-                @can('manage_orders')
+                {{-- @can('manage_orders')
                     <div class="row g-3 mb-3">
                         <a href="{{ route('admin.orders.index') }}" class="col-lg-3 col-sm-6">
                             <div class="card h-100 flex-column">
@@ -231,7 +243,7 @@
                             </div>
                         </a>
                     </div>
-                @endcan
+                @endcan --}}
 
                 @can('orders')
                     <div class="row mb-3">
@@ -363,8 +375,79 @@
                 @endcan
 
                 <!-- counter in dashboard -->
-                <div class="row g-3 mb-3">
-                    @can('manage_orders')
+                <div class="row g-3 mb-3">                                                  
+                    @can('manage_orders')                  
+                        <a href="{{ route('admin.orders.index') }}" class="col-lg-3 col-sm-6">
+                            <div class="card h-100 flex-column">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-lg">
+                                            <div class="text-center bg-soft-primary rounded-circle">
+                                                <span class="text-primary"> <i data-feather="shopping-bag"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h4 class="mb-1">{{ \App\Models\Order::count() }}</h4>
+                                            <span class="text-muted">{{ localize('Total Orders') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="{{ route('admin.orders.index') }}?delivery_status={{ orderPendingStatus() }}"
+                            class="col-lg-3 col-sm-6">
+                            <div class="card h-100 flex-column">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-lg">
+                                            <div class="text-center bg-soft-warning rounded-circle">
+                                                <span class="text-warning"> <i data-feather="clock"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h4 class="mb-1">{{ \App\Models\Order::isPlacedOrPending()->count() }}</h4>
+                                            <span class="text-muted">{{ localize('Order Pending') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="{{ route('admin.orders.index') }}?delivery_status={{ orderProcessingStatus() }}"
+                            class="col-lg-3 col-sm-6">
+                            <div class="card h-100 flex-column">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-lg">
+                                            <div class="text-center bg-soft-info rounded-circle">
+                                                <span class="text-info"> <i data-feather="refresh-cw"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h4 class="mb-1">{{ \App\Models\Order::isProcessing()->count() }}</h4>
+                                            <span class="text-muted">{{ localize('Order Processing') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="{{ route('admin.orders.index') }}?delivery_status={{ orderDeliveredStatus() }}"
+                            class="col-lg-3 col-sm-6">
+                            <div class="card h-100 flex-column">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-lg">
+                                            <div class="text-center bg-soft-success rounded-circle">
+                                                <span class="text-success"> <i data-feather="check-circle"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h4 class="mb-1">{{ \App\Models\Order::isDelivered()->count() }}</h4>
+                                            <span class="text-muted">{{ localize('Total Delivered') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                         <a href="{{ route('admin.orders.index') }}?delivery_status={{ orderPickedUpStatus() }}"
                             class="col-lg-3 col-sm-6">
                             <div class="card h-100 flex-column">
@@ -679,6 +762,54 @@
                     </a>
                 </div>
                 <!-- counter in dashboard -->
+
+                <div class="col-12">
+                    <!-- top selling products -->
+                        <div class="card flex-column">
+                            <div class="card-body px-0">
+                                <div class="px-3">
+                                    <h5 class="fw-bold mb-1">{{ localize('Top Selling Products') }}</h5>
+                                    <span class="text-muted">
+                                        {{ localize('We have listed ' . \App\Models\Product::count() . ' total products.') }}</span>
+                                </div>
+                                <div class="tt-top-selling mt-3" data-simplebar>
+                                    <div class="row">
+                                        @php
+                                            $top_selling_products = \App\Models\Product::where('total_sale_count', '>', 0)
+                                                ->orderBy('total_sale_count', 'DESC')
+                                                ->take(15)
+                                                ->get();
+                                        @endphp
+                                        @foreach ($top_selling_products as $product)                                           
+                                                {{-- <span class="fw-bold heading-font text-end  cursor-pointer"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="{{ localize('Total Sales') }}">({{ $product->total_sale_count }})</span> --}}
+                                           
+                                        <div class="col-2 mb-4">
+                                            <div class="card" style="padding: 5px !important">
+                                                <div class="row">
+                                                    <div class="col-12 text-center">
+                                                        <img src="{{ uploadedAsset($product->thumbnail_image) }}" alt="" width="50% !important">
+                                                        <div class="card-body mt-1" style="padding: 0% !important">
+                                                            <h6 class="fs-md mb-0 tt-line-clamp tt-clamp-1 text-left">
+                                                                {{ $product->collectLocalization('name') }}
+                                                            </h6>
+                                                            <span class="text-muted fs-sm text-left">{{ localize('Brand') }}:
+                                                                {{ optional($product->brand)->name }}
+                                                            </span>                                               
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                        </div>                                                                   
+                                        @endforeach
+                                    </div>                                   
+                                </div>
+                            </div>
+                        </div>
+                        <!-- top selling products --> 
+                </div>
+
 
             </div>
         </section>

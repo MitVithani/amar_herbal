@@ -16,14 +16,6 @@
             class="img-fluid">
     </div>
     <div class="card-content w-100">
-
-        @if (getSetting('enable_reward_points') == 1)
-            <span class="fs-xxs fw-bold" data-bs-toggle="tooltip" data-bs-placement="top"
-                data-bs-title="{{ localize('Reward Points') }}">
-                <i class="fas fa-medal"></i> {{ $product->reward_points }}
-            </span>
-        @endif
-
         <!--product category start-->
         <div class="mb-2 tt-category tt-line-clamp tt-clamp-1">
             @if ($product->categories()->count() > 0)
@@ -68,11 +60,11 @@
             if ($product->variations()->count() > 1) {
                 $isVariantProduct = 1;
             } else {
-                $stock = $product->variations[0]->product_variation_stock ? $product->variations[0]->product_variation_stock->stock_qty : 0;
+                $stock = $product->variations[0]->product_variation_stock->stock_qty;
             }
         @endphp
 
-        @if ($isVariantProduct)
+        {{-- @if ($isVariantProduct)
             <a href="javascript:void(0);" class="btn btn-outline-secondary btn-sm border-secondary mt-4"
                 onclick="showProductDetailsModal({{ $product->id }})">{{ localize('Add to Cart') }}</a>
         @else
@@ -82,14 +74,14 @@
                 <input type="hidden" value="1" name="quantity">
 
                 @if (!$isVariantProduct && $stock < 1)
-                    <a href="javascript:void(0);" class="btn btn-outline-secondary btn-sm border-secondary mt-4">
-                        {{ localize('Out of Stock') }}</a>
+                    <button type="button" class="btn btn-outline-secondary btn-sm border-secondary mt-4">
+                        {{ localize('Out of Stock') }}</button>
                 @else
-                    <a href="javascript:void(0);" onclick="directAddToCartFormSubmit(this)"
-                        class="btn btn-outline-secondary btn-sm border-secondary mt-4 direct-add-to-cart-btn add-to-cart-text">{{ localize('Add to Cart') }}</a>
+                    <button type="button" onclick="directAddToCartFormSubmit(this)"
+                        class="btn btn-outline-secondary btn-sm border-secondary mt-4 direct-add-to-cart-btn add-to-cart-text">{{ localize('Add to Cart') }}</button>
                 @endif
             </form>
-        @endif
+        @endif --}}
 
 
     </div>

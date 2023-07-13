@@ -6,14 +6,17 @@
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/mashrom.png') }}" alt="mashrom"
         class="position-absolute mashrom z--1" data-parallax='{"x": 100}'>
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-xl-5">
-                <div class="section-title text-center text-xl-start">
-                    <h3 class="mb-0">{{ localize('Top Trending Products') }}</h3>
+        {{-- <div class="row align-items-center"> --}}
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="section-title">
+                        <h3 class="mb-0">{{ localize('Top Trending Products') }}</h3>
+                    </div>
                 </div>
             </div>
-            <div class="col-xl-7">
-                <div class="filter-btns gshop-filter-btn-group text-center text-xl-end mt-4 mt-xl-0">
+            <div class="row mt-2">
+                <div class="col-12 text-center">
+                <div class="filter-btns gshop-filter-btn-group mt-4 mt-xl-0">
 
                     @php
                         $trending_product_categories = getSetting('trending_product_categories') != null ? json_decode(getSetting('trending_product_categories')) : [];
@@ -26,6 +29,7 @@
                 </div>
             </div>
         </div>
+        {{-- </div> --}}
         <div class="row justify-content-center g-4 mt-5 filter_group">
 
             @php
@@ -37,7 +41,7 @@
                 <div
                     class="col-xxl-3 col-lg-4 col-md-6 col-sm-10 filter_item
                     @php
-if($product->categories()->count() > 0){ 
+                            if($product->categories()->count() > 0){ 
                             foreach ($product->categories as $category) {
                                echo $category->id .' ';
                             }

@@ -24,7 +24,7 @@
                                 {{ getSetting('topbar_email') }}
                             </a>
                         </li>
-                        <li class="nav-item dropdown tt-language-dropdown">
+                        <li class="nav-item">
                             <span class="me-1">
                                 <svg width="12" height="17" viewBox="0 0 12 17" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -39,32 +39,7 @@
                                         fill="white" stroke="white" stroke-width="0.3" />
                                 </svg>
                             </span>
-
-                            @if (\App\Models\Location::count() > 1)
-                                @php
-                                    if (Session::has('stock_location_id')) {
-                                        $location_id = session('stock_location_id');
-                                    } else {
-                                        $location_id = \App\Models\Location::where('is_default', 1)->first()->id;
-                                    }
-                                    $location = \App\Models\Location::where('id', $location_id)->first();
-                                @endphp
-
-                                <a href="#" class="dropdown-toggle text-capitalize " data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">{{ $location->name }}</a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    @foreach (\App\Models\Location::where('is_published', 1)->get() as $key => $location)
-                                        <li>
-                                            <a class="dropdown-item fs-xs text-capitalize" href="javascript:void(0);"
-                                                onclick="changeLocation(this)" data-location="{{ $location->id }}">
-                                                {{ $location->name }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @else
-                                {{ getSetting('topbar_location') }}
-                            @endif
+                            {{ getSetting('topbar_location') }}
                         </li>
 
 
@@ -75,10 +50,6 @@
                                 $locale = env('DEFAULT_LANGUAGE');
                             }
                             $currentLanguage = \App\Models\Language::where('code', $locale)->first();
-                            
-                            if ($currentLanguage == null) {
-                                $currentLanguage = \App\Models\Language::where('code', 'en')->first();
-                            }
                         @endphp
 
                         <li class="nav-item dropdown tt-language-dropdown">
@@ -109,10 +80,6 @@
                                 $currency_code = env('DEFAULT_CURRENCY');
                             }
                             $currentCurrency = \App\Models\Currency::where('code', $currency_code)->first();
-                            
-                            if ($currentCurrency == null) {
-                                $currentCurrency = \App\Models\Currency::where('code', 'usd')->first();
-                            }
                         @endphp
 
                         <li class="nav-item dropdown tt-curency-dropdown">
@@ -129,17 +96,6 @@
                                     </li>
                                 @endforeach
                             </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="javascript:void(0)" class="btn btn-link p-0 tt-theme-toggle fw-normal">
-                                <div class="tt-theme-light" data-bs-toggle="tooltip" data-bs-placement="left"
-                                    data-bs-title="Dark">{{ localize('Dark') }} <i class="fas fa-moon fs-lg ms-1"></i>
-                                </div>
-                                <div class="tt-theme-dark" data-bs-toggle="tooltip" data-bs-placement="left"
-                                    data-bs-title="Light">{{ localize('Light') }} <i class="fas fa-sun fs-lg ms-1"></i>
-                                </div>
-                            </a>
                         </li>
                     </ul>
                 </div>
@@ -187,34 +143,41 @@
                         </div>
                         <nav class="gshop-navmenu ms-3 d-none d-xl-block">
                             <ul class="d-flex align-itmes-center justify-content-end">
-                                <li><a href="{{ route('home') }}">{{ localize('Home') }}</a></li>
+                                {{-- <li><a href="{{ route('home') }}">{{ localize('Home') }}</a></li> --}}
                                 <li><a href="{{ route('products.index') }}">{{ localize('Products') }}</a></li>
-                                <li><a href="{{ route('home.campaigns') }}">{{ localize('Campaigns') }}</a>
+                                <li><a href="{{ route('home.campaigns') }}">{{ localize('Offers') }}</a>
                                 </li>
                                 <li><a href="{{ route('home.coupons') }}">{{ localize('Coupons') }}</a>
                                 </li>
 
-                                <li class="has-submenu">
+                                <li><a
+                                    href="{{ route('home.pages.aboutUs') }}">{{ localize('About Us') }}</a>
+                            </li>
+                            <li><a
+                                    href="{{ route('home.pages.contactUs') }}">{{ localize('Contact Us') }}</a>
+                            </li>
+
+                                  {{-- <li class="has-submenu">
                                     <a href="javascript:void(0);">{{ localize('Pages') }}<span
                                             class="ms-1 fs-xs float-end"><i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                     <ul>
-                                        @php
+                                      @php
                                             $pages = [];
                                             if (getSetting('navbar_pages') != null) {
                                                 $pages = \App\Models\Page::whereIn('id', json_decode(getSetting('navbar_pages')))->get();
                                             }
-                                        @endphp
+                                        @endphp 
 
-                                        <li><a href="{{ route('home.blogs') }}">{{ localize('Blogs') }}</a></li>
-                                        <li><a
+                                        {{-- <li><a href="{{ route('home.blogs') }}">{{ localize('Blogs') }}</a></li> --}}
+                                        {{-- <li><a
                                                 href="{{ route('home.pages.aboutUs') }}">{{ localize('About Us') }}</a>
                                         </li>
                                         <li><a
                                                 href="{{ route('home.pages.contactUs') }}">{{ localize('Contact Us') }}</a>
-                                        </li>
+                                        </li> 
 
-                                        @foreach ($pages as $navbarPage)
+                                        {{-- @foreach ($pages as $navbarPage)
                                             <li>
                                                 <a href="{{ route('home.pages.show', $navbarPage->slug) }}"
                                                     class="d-flex align-items-center">
@@ -223,7 +186,7 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                </li>
+                                </li> --}}
                             </ul>
                         </nav>
                         <div
@@ -305,14 +268,10 @@
                                 @php
                                     $carts = [];
                                     if (Auth::check()) {
-                                        $carts = App\Models\Cart::where('user_id', Auth::user()->id)
-                                            ->where('location_id', session('stock_location_id'))
-                                            ->get();
+                                        $carts = App\Models\Cart::where('user_id', Auth::user()->id)->get();
                                     } else {
                                         if (isset($_COOKIE['guest_user_id'])) {
-                                            $carts = App\Models\Cart::where('guest_user_id', (int) $_COOKIE['guest_user_id'])
-                                                ->where('location_id', session('stock_location_id'))
-                                                ->get();
+                                            $carts = App\Models\Cart::where('guest_user_id', (int) $_COOKIE['guest_user_id'])->get();
                                         }
                                     }
                                 @endphp
@@ -382,7 +341,7 @@
                                 </div>
                             </a>
                         </div>
-                        <button class="gshop-offcanvas-btn offcanvas-toggle ms-3">
+                        {{-- <button class="gshop-offcanvas-btn offcanvas-toggle ms-3">
                             <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -413,10 +372,11 @@
                                     d="M26.4002 22.3786C24.4721 22.3786 22.9028 23.9471 22.9028 25.876C22.9028 27.8041 24.4721 29.3733 26.4002 29.3733C28.3291 29.3733 29.8976 27.8049 29.8976 25.876C29.8976 23.9471 28.3284 22.3786 26.4002 22.3786Z"
                                     fill="white" />
                             </svg>
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </header>
+

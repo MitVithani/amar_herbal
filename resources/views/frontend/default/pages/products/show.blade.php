@@ -73,9 +73,9 @@
     <!--breadcrumb-->
 
     <!--product details start-->
-    <section class="product-details-area ptb-120">
+    <section class="product-details-area">
         <div class="container">
-            <div class="row g-4">
+            <div class="row g-4" style="margin-top: 5px">
                 <div class="col-xl-9">
                     <div class="product-details">
                         <!-- product-view-box -->

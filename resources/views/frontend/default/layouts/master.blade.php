@@ -67,6 +67,57 @@
     <link rel="apple-touch-icon" href="{{ staticAsset('/pwa.png') }}"/>
     <link rel="manifest" href="{{ staticAsset('/manifest.json') }}"/>
 
+    <style>
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 999999;
+        }
+        #preloader .loading-bar {
+            width: 100%;
+            height: 3px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+            background: #f9fafb;
+        }
+        #preloader .loading-bar:before {
+            content: "";
+            width: 35px;
+            height: 3px;
+            background: #4eb529;
+            position: absolute;
+            left: -34px;
+            -webkit-animation: bluebar 1.5s infinite ease;
+            animation: bluebar 1.5s infinite ease;
+        }
+        @-webkit-keyframes bluebar {
+            50% {
+                left: 96px;
+            }
+        }
+        @keyframes bluebar {
+            50% {
+                left: 96px;
+            }
+        }
+        </style>
+      
+
 </head>
 
 <body>
@@ -81,9 +132,12 @@
         
     @endphp
 
-    <!--preloader start-->
-    <div id="preloader">
-        <img src="{{ staticAsset('frontend/default/assets/img/preloader.gif') }}" alt="preloader" class="img-fluid">
+      <!--preloader start-->
+      <div id="preloader" class="bg-light-subtle">
+        <div class="preloader-wrap">
+            <img src="{{ uploadedAsset(getSetting('navbar_logo')) }}" class="img-fluid">
+            <div class="loading-bar"></div>
+        </div>
     </div>
     <!--preloader end-->
 

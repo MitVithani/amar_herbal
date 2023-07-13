@@ -23,7 +23,7 @@
         let productThumbnailSlider = new Swiper(".product-thumbnail-slider", {
             slidesPerView: 4,
             speed: 700,
-            loop: true,
+            loop: false,
             spaceBetween: 20,
             slideToClickedSlide: true,
             loopedSlides: 6,

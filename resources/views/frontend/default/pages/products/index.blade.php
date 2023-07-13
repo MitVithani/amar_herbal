@@ -24,9 +24,9 @@
 
     <form class="filter-form" action="{{ Request::fullUrl() }}" method="GET">
         <!--shop grid section start-->
-        <section class="gshop-gshop-grid ptb-120">
+        <section class="gshop-gshop-grid">
             <div class="container">
-                <div class="row g-4">
+                <div class="row g-4" style="margin-top: 5px;">
 
                     <div class="col-xl-3">
                         <div class="d-none d-xl-block">
@@ -54,8 +54,7 @@
                     <div class="col-xl-9">
                         <div class="shop-grid">
                             <!--filter-->
-                            <div
-                                class="listing-top d-flex align-items-center justify-content-between flex-wrap gap-3 bg-white rounded-2 px-4 py-4 mb-5">
+                            {{-- <div class="listing-top d-flex align-items-center justify-content-between flex-wrap gap-3 bg-white rounded-2 px-4 py-4 mb-5">
                                 <p class="mb-0 fw-bold">{{ localize('Showing') }}
                                     {{ $products->firstItem() }}-{{ $products->lastItem() }} {{ localize('of') }}
                                     {{ $products->total() }} {{ localize('results') }}</p>
@@ -131,7 +130,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!--filter-->
 
                             <!--products-->
