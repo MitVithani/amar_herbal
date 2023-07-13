@@ -37,7 +37,7 @@
                     <div class="col-xl-12">
                         <div class="row g-3">
                             <!-- total sales chart -->
-                            <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
                                 <div class="card h-100 flex-column">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center justify-content-between">
@@ -70,7 +70,7 @@
 
 
                             <!-- top 5 category sales chart -->
-                            <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
                                 <div class="card h-100 flex-column">
                                     <div class="card-body d-flex flex-column h-100">
                                         <span class="text-muted">{{ localize('Top 5 Category Sales') }}</span>
@@ -82,7 +82,7 @@
                             <!-- top 5 category sales chart -->
 
                             <!-- total order this month chart -->
-                            <div class="col-sm-6 col-md-3 col-lg-3 d-none d-lg-block d-md-block">
+                            <div class="col-sm-6 col-md-6 col-lg-6 d-none d-lg-block d-md-block">
                                 <div class="card h-100 flex-column">
                                     <div class="card-body d-flex flex-column h-100">
                                         <span class="text-muted">{{ localize('Last 30 Days Orders') }}</span>
@@ -92,7 +92,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-md-3 col-lg-3 d-none d-lg-block d-md-block">
+                            <div class="col-sm-6 col-md-6 col-lg-6 d-none d-lg-block d-md-block">
                                 <div class="card h-100 flex-column">
                                     <div class="card-body d-flex flex-column h-100">
                                         <div class="d-flex align-items-center justify-content-between">
