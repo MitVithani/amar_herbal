@@ -10,10 +10,10 @@
 
     <!-- products -->
     @php
-        $productsActiveRoutes = ['admin.brands.index', 'admin.brands.edit', 'admin.units.index', 'admin.units.edit', 'admin.variations.index', 'admin.variations.edit', 'admin.variationValues.index', 'admin.variationValues.edit', 'admin.taxes.index', 'admin.taxes.edit', 'admin.categories.index', 'admin.categories.create', 'admin.categories.edit', 'admin.products.index', 'admin.products.create', 'admin.products.edit'];
+        $productsActiveRoutes = ['admin.brands.index', 'admin.brands.edit', 'admin.units.index', 'admin.units.edit', 'admin.variations.index', 'admin.variations.edit', 'admin.variationValues.index', 'admin.variationValues.edit', 'admin.taxes.index', 'admin.taxes.edit', 'admin.categories.index', 'admin.categories.create', 'admin.categories.edit', 'admin.products.index', 'admin.products.create', 'admin.products.edit','admin.tags.index', 'admin.tags.edit'];
     @endphp
 
-    @canany(['products', 'categories', 'variations', 'brands', 'units', 'taxes'])
+    @canany(['products', 'categories', 'variations', 'brands', 'units','tags','taxes'])
         <li class="side-nav-item nav-item {{ areActiveRoutes($productsActiveRoutes, 'tt-menu-item-active') }}">
             <a data-bs-toggle="collapse" href="#sidebarProducts"
                 aria-expanded="{{ areActiveRoutes($productsActiveRoutes, 'true') }}" aria-controls="sidebarProducts"
@@ -68,6 +68,14 @@
                         <li class="{{ areActiveRoutes(['admin.units.index', 'admin.units.edit'], 'tt-menu-item-active') }}">
                             <a href="{{ route('admin.units.index') }}"
                                 class="{{ areActiveRoutes(['admin.units.index']) }}">{{ localize('Units') }}</a>
+                        </li>
+                    @endcan
+                 <!-- tags -->
+
+                    @can('tags')
+                        <li class="{{ areActiveRoutes(['admin.tags.index', 'admin.tags.edit'], 'tt-menu-item-active') }}">
+                            <a href="{{ route('admin.tags.index') }}"
+                                class="{{ areActiveRoutes(['admin.tags.index']) }}">{{ localize('Tags') }}</a>
                         </li>
                     @endcan
 
@@ -927,7 +935,7 @@ $reportActiveRoutes = ['admin.reports.orders', 'admin.reports.sales', 'admin.rep
 
     <!-- staffs -->
     @php
-        $staffActiveRoute=['admin.staffs.index', 'admin.staffs.create', 'admin.staffs.edit'];
+        $staffActiveRoute=['admin.staffs.index', 'admin.staffs.create', 'admin.staffs.edit','admin.roles.index', 'admin.roles.create', 'admin.roles.edit'];
     @endphp
      @can('staffs')
      <li class="side-nav-item nav-item {{ areActiveRoutes($staffActiveRoute, 'tt-menu-item-active') }}">
@@ -935,7 +943,7 @@ $reportActiveRoutes = ['admin.reports.orders', 'admin.reports.sales', 'admin.rep
             aria-expanded="{{ areActiveRoutes($staffActiveRoute, 'true') }}" aria-controls="staff"
             class="side-nav-link tt-menu-toggle">
             <span class="tt-nav-link-icon"><i data-feather="user-check"></i></span>
-            <span class="tt-nav-link-text">{{ localize('Staffs') }}</span>
+            <span class="tt-nav-link-text">{{ localize('System Settings') }}</span>
         </a>
         <div class="collapse {{ areActiveRoutes($staffActiveRoute, 'show') }}" id="staff">
             <ul class="side-nav-second-level">
@@ -943,10 +951,17 @@ $reportActiveRoutes = ['admin.reports.orders', 'admin.reports.sales', 'admin.rep
                 @can('staffs')
                 <li class="{{ areActiveRoutes(['admin.staffs.index', 'admin.staffs.create', 'admin.staffs.edit'], 'tt-menu-item-active') }}">
                     <a href="{{ route('admin.staffs.index') }}"
-                        class="{{ areActiveRoutes(['admin.staffs.index']) }}">{{ localize('Social Media Login') }}</a>
+                        class="{{ areActiveRoutes(['admin.staffs.index']) }}">{{ localize('Employees staffs') }}</a>
                 </li>
                @endcan
 
+                 <!-- Roles & Permission -->
+                 @can('roles_and_permissions')
+                 <li class="{{ areActiveRoutes(['admin.roles.index', 'admin.roles.create', 'admin.roles.edit'], 'tt-menu-item-active') }}">
+                     <a href="{{ route('admin.roles.index') }}"
+                         class="{{ areActiveRoutes(['admin.roles.index']) }}">{{ localize('Roles & Permissions') }}</a>
+                 </li>
+                @endcan
             </ul>
         </div>
      </li>
@@ -970,40 +985,18 @@ $reportActiveRoutes = ['admin.reports.orders', 'admin.reports.sales', 'admin.rep
     @endcan --}}
 
     <!-- Contents -->
-    <li class="side-nav-title side-nav-item nav-item">
+    {{-- <li class="side-nav-title side-nav-item nav-item">
         <span class="tt-nav-title-text">{{ localize('Contents') }}</span>
-    </li>
+    </li> --}}
 
-    <!-- tags -->
-    @php
-        $tagsActiveRoutes = ['admin.tags.index', 'admin.tags.edit'];
-    @endphp
-    @can('tags')
-        <li class="side-nav-item nav-item {{ areActiveRoutes($tagsActiveRoutes, 'tt-menu-item-active') }}">
-            <a href="{{ route('admin.tags.index') }}" class="side-nav-link">
-                <span class="tt-nav-link-icon"> <i data-feather="tag"></i></span>
-                <span class="tt-nav-link-text">{{ localize('Tags') }}</span>
-            </a>
-        </li>
-    @endcan
+   
 
     
-    <!-- Promotions -->
+    {{-- <!-- Promotions -->
     <li class="side-nav-title side-nav-item nav-item">
         <span class="tt-nav-title-text">{{ localize('Promotions') }}</span>
-    </li>
+    </li> --}}
 
-    <!-- Roles & Permission -->
-    @php
-        $rolesActiveRoutes = ['admin.roles.index', 'admin.roles.create', 'admin.roles.edit'];
-    @endphp
-    @can('roles_and_permissions')
-        <li class="side-nav-item nav-item {{ areActiveRoutes($rolesActiveRoutes, 'tt-menu-item-active') }}">
-            <a href="{{ route('admin.roles.index') }}" class="side-nav-link">
-                <span class="tt-nav-link-icon"><i data-feather="unlock"></i></span>
-                <span class="tt-nav-link-text">{{ localize('Roles & Permissions') }}</span>
-            </a>
-        </li>
-    @endcan
+  
 
 </ul>
