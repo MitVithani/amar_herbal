@@ -215,6 +215,7 @@ Route::group(
 
         # orders
         Route::group(['prefix' => 'orders'], function () {
+            Route::post('/add-shipRokcket-no', [OrdersController::class, 'add_shipRokcket_no'])->name('admin.add_shipRokcket_no');
             Route::get('/', [OrdersController::class, 'index'])->name('admin.orders.index');
             Route::get('/{id}', [OrdersController::class, 'show'])->name('admin.orders.show');
             Route::post('/update-payment-status', [OrdersController::class, 'updatePaymentStatus'])->name('admin.orders.update_payment_status');

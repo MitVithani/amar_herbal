@@ -20,7 +20,7 @@ class OrdersController extends Controller
     public function __construct()
     {
         $this->middleware(['permission:orders'])->only('index');
-        $this->middleware(['permission:manage_orders'])->only(['show', 'updatePaymentStatus', 'updateDeliveryStatus', 'downloadInvoice']);
+        $this->middleware(['permission:manage_orders'])->only(['show', 'updatePaymentStatus', 'updateDeliveryStatus', 'downloadInvoice', 'add_shipRokcket_no']);
     }
 
     # get all orders
@@ -84,6 +84,15 @@ class OrdersController extends Controller
         return view('backend.pages.orders.index', compact('orders', 'searchKey', 'locations', 'locationId', 'searchCode', 'deliveryStatus', 'paymentStatus', 'posOrder'));
     }
 
+    function add_shipRokcket_no(Request $request) {
+        try {
+            Order::where(['id' => $request->ship_order_no])->update(['shipment_order_id' => $request->shipRokcket_no]);
+            return 1;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+    
     # show order details
     public function show($id)
     {

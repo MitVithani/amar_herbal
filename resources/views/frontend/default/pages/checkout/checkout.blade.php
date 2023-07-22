@@ -190,7 +190,7 @@
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
                                             <label>{{ localize('Phone') }}</label>
-                                            <input type="text" name="phone"
+                                            <input type="text" name="phone" id="phone"
                                                 placeholder="{{ localize('Phone Number') }}" value="{{ $user->phone }}"
                                                 required>
                                         </div>
@@ -241,4 +241,108 @@
     <!--add address modal start-->
     @include('frontend.default.inc.addressForm', ['countries' => $countries])
     <!--add address modal end-->
+    
+    <!-- The Modal -->
+    <div class="modal fade" id="otpModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                 <!-- Modal Header -->
+                 <div class="modal-header">
+                    <h2 class="h3">{{ localize('Verify Your Phone Number') }}
+                    </h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+            
+                    <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="justify-content-center col-sm-12 row">
+                        <div class="col-sm-6">
+                            <div class="row g-3">
+                                <div class="col-sm-12">
+                                    <div class="input-field">
+                                        <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Phone') }}
+                                            <sup class="text-danger">*</sup>
+                                            <small>({{ localize('Enter phone number with country code') }})</small></label>
+                                        <input type="phone" id="otp_phone" name="otp_phone"
+                                            placeholder="{{ localize('Enter your phone number') }}" class="theme-input" required disabled>
+                                    </div>
+                                </div>
+    
+                                <div class="col-sm-12">
+                                    <div class="input-field">
+                                        <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Verification Code') }}</label>
+                                        <input type="verification_code" id="verification_code" name="verification_code"
+                                            placeholder="{{ localize('Enter verification code') }}" class="theme-input">
+                                    </div>
+                                </div>
+    
+                                <div class="col-sm-12">
+                                    <button type="butotn" class="btn btn-primary mt-4" onclick="VerifyOtpConfirmation()">
+                                        {{ localize('Verify') }}
+                                    </button>
+                                </div>
+                                <p class="mb-0 fs-xs mt-3">{{ localize("Don't have get any code?") }} <a
+                                        href="">{{ localize('Resend') }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
 @endsection
+
+{{-- @section('scripts') --}}
+    <script>
+        function SendOtp(){
+            var phone = $('#phone').val();
+
+            $.ajax({
+                url: "{{ route('sendotp.phone') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: 'GET',
+                data: { phone: phone },
+                dataType: 'JSON',
+                success: function (res) {
+                }
+            });
+
+            $("#otp_phone").val(phone);
+            $("#otpModal").modal('show');
+
+        }
+
+        function VerifyOtpConfirmation(){
+            var phone = $('#phone').val();
+            var verification_code = $('#verification_code').val();
+            if(verification_code ==""){
+                alert("Please enter verification code");
+            }else{
+
+                $.ajax({
+                    url: "{{ route('phone.verification.confirmation') }}",
+                    // headers: {
+                    //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    // },
+                    type: 'post',
+                    data: {_token: '{{ csrf_token() }}', phone: phone, verification_code: verification_code},
+                    dataType: 'JSON',
+                    success: function (res) {
+                        if(res == 1){
+                            $('.PlaceOrder').show();
+                            $('.SendOtpBtn').hide();
+                            $("#otpModal").modal('hide');
+
+                        }else if(res == 0){
+                            alert('Otp is wrong');
+                        }
+                        // location.reload();
+                    }
+                });
+            }
+        }
+    </script>
+{{-- @endsection --}}

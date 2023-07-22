@@ -34,7 +34,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return 'Application cache has been cleared';
+});
 Auth::routes(['verify' => true]);
 
 Route::controller(LoginController::class)->group(function () {
@@ -45,6 +48,7 @@ Route::controller(LoginController::class)->group(function () {
 
 Route::controller(VerificationController::class)->group(function () {
     Route::get('/verify-phone', 'verifyPhone')->name('verification.phone');
+    Route::get('/sendotp-phone', 'sendotpPhone')->name('sendotp.phone');
     Route::get('/email/resend', 'resend')->name('verification.resend');
     Route::get('/verification-confirmation/{code}', 'verification_confirmation')->name('email.verification.confirmation');
     Route::post('/verification-confirmation', 'phone_verification_confirmation')->name('phone.verification.confirmation');

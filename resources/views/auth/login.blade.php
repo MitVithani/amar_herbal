@@ -22,19 +22,19 @@
                             </a>
                         </div>
                         <h2 class="mb-4 h3">{{ localize('Hey there!') }}
-                            <br>{{ localize('Welcome back to Grostore.') }}
+                            <br>{{ localize('Welcome back to herbal.') }}
                         </h2>
 
                         <div class="row g-3">
                             <div class="col-sm-12">
                                 <div class="input-field">
-                                    <input type="hidden" name="login_with" class="login_with" value="email">
+                                    <input type="hidden" name="login_with" class="login_with" value="phone">
 
-                                    <span class="login-email @if (old('login_with') == 'phone') d-none @endif">
+                                    <span class="login-email d-none">
                                         <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Email') }}</label>
                                         <input type="email" id="email" name="email"
                                             placeholder="{{ localize('Enter your email') }}" class="theme-input mb-1"
-                                            value="{{ old('email') }}" required>
+                                            value="{{ old('email') }}" >
                                         <small class="">
                                             <a href="javascript:void(0);" class="fs-sm login-with-phone-btn"
                                                 onclick="handleLoginWithPhone()">
@@ -42,17 +42,17 @@
                                         </small>
                                     </span>
 
-                                    <span class="login-phone @if (old('login_with') == 'email' || old('login_with') == '') d-none @endif">
+                                    {{-- <span class="login-phone @if (old('login_with') == 'email' || old('login_with') == '') d-none @endif"> --}}
                                         <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Phone') }}</label>
                                         <input type="text" id="phone" name="phone" placeholder="+xxxxxxxxxx"
-                                            class="theme-input mb-1" value="{{ old('phone') }}">
+                                            class="theme-input mb-1" value="{{ old('phone') }}" required>
 
-                                        <small class="">
+                                        {{-- <small class="">
                                             <a href="javascript:void(0);" class="fs-sm login-with-email-btn"
                                                 onclick="handleLoginWithEmail()">
                                                 {{ localize('Login with email?') }}</a>
-                                        </small>
-                                    </span>
+                                        </small> --}}
+                                    {{-- </span> --}}
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -79,7 +79,7 @@
                             <a href="{{ route('password.request') }}" class="fs-sm">{{ localize('Forgot Password') }}</a>
                         </div>
 
-                        @if (env('DEMO_MODE') == 'On')
+                        {{-- @if (env('DEMO_MODE') == 'On')
                             <div class="row mt-5">
                                 <div class="col-12">
                                     <label class="fw-bold">Admin Access</label>
@@ -103,11 +103,11 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
 
                         <div class="row g-4 mt-3">
                             <div class="col-sm-12">
-                                <button type="submit" class="btn btn-primary w-100 sign-in-btn"
+                                <button type="button" class="btn btn-primary w-100 sign-in-btn"
                                     onclick="handleSubmit()">{{ localize('Sign In') }}</button>
                             </div>
 
@@ -115,7 +115,7 @@
 
                         <div class="row g-4 mt-3">
                             <!--social login-->
-                            @include('frontend.default.inc.social')
+                            {{-- @include('frontend.default.inc.social') --}}
                             <!--social login-->
 
                         </div>
@@ -126,6 +126,56 @@
             </div>
         </div>
     </section>
+    
+    <!-- The Modal -->
+    <div class="modal fade" id="otpModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                 <!-- Modal Header -->
+                 <div class="modal-header">
+                    <h2 class="h3">{{ localize('Verify Your Phone Number') }}
+                    </h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+            
+                    <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="justify-content-center col-sm-12 row">
+                        <div class="col-sm-6">
+                            <div class="row g-3">
+                                <div class="col-sm-12">
+                                    <div class="input-field">
+                                        <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Phone') }}
+                                            <sup class="text-danger">*</sup>
+                                            <small>({{ localize('Enter phone number with country code') }})</small></label>
+                                        <input type="phone" id="otp_phone" name="otp_phone"
+                                            placeholder="{{ localize('Enter your phone number') }}" class="theme-input" required disabled>
+                                    </div>
+                                </div>
+    
+                                <div class="col-sm-12">
+                                    <div class="input-field">
+                                        <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Verification Code') }}</label>
+                                        <input type="verification_code" id="verification_code" name="verification_code"
+                                            placeholder="{{ localize('Enter verification code') }}" class="theme-input">
+                                    </div>
+                                </div>
+    
+                                <div class="col-sm-12">
+                                    <button type="butotn" class="btn btn-primary mt-4" onclick="VerifyOtpConfirmation()">
+                                        {{ localize('Verify') }}
+                                    </button>
+                                </div>
+                                <p class="mb-0 fs-xs mt-3">{{ localize("Don't have get any code?") }} <a
+                                        href="">{{ localize('Resend') }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
 @endsection
 
 
@@ -169,8 +219,55 @@
 
         // disable login button
         function handleSubmit() {
-            $('#login-form').on('submit', function(e) {
-                $('.sign-in-btn').prop('disabled', true);
+            var phonenumber = $("#phone").val();
+            // var filter_phone = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/;
+            // if (!filter_phone.test(phone)) {
+            //     alert('Please Enter valid phone number');
+            //     return false;
+            // }
+            if(phonenumber.length  == 0){
+                alert("Please Enter The Phone Number");
+            }else{
+                $("#otp_phone").val(phonenumber);
+                SendOtp();
+                $("#otpModal").modal('show');
+            }
+            // $('#login-form').on('submit', function(e) {
+            //     $('.sign-in-btn').prop('disabled', true);
+            // });
+        }
+
+        function SendOtp(){
+            var phone = $('#phone').val();
+
+            $.ajax({
+                url: "{{ route('sendotp.phone') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: 'GET',
+                data: { phone: phone },
+                dataType: 'JSON',
+                success: function (res) {
+                }
+            });
+        }
+        
+        function VerifyOtpConfirmation(){
+            var phone = $('#phone').val();
+            var verification_code = $('#verification_code').val();
+
+            $.ajax({
+                url: "{{ route('phone.verification.confirmation') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: 'post',
+                data: { phone: phone, verification_code: verification_code},
+                dataType: 'JSON',
+                success: function (res) {
+                    location.reload();
+                }
             });
         }
     </script>

@@ -74,5 +74,7 @@
         <input type="number" name="tips" value="0" min="0" step="0.001">
     </div>
 
-    <button type="submit" class="btn btn-primary btn-md rounded mt-6 w-100">{{ localize('Place Order') }}</button>
+    <button type="submit" class="btn btn-primary btn-md rounded mt-6 w-100 PlaceOrder" style="display: none">{{ localize('Place Order') }}</button>
+    
+    <button type="button" class="btn btn-primary btn-md rounded mt-6 w-100 SendOtpBtn" onclick="SendOtp()">{{ localize('Send Otp') }}</button>
 </div>

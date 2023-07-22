@@ -133,6 +133,7 @@
                                     <th data-breakpoints="xs sm">{{ localize('Payment') }}</th>
                                     <th data-breakpoints="xs sm">{{ localize('Status') }}</th>
                                     <th data-breakpoints="xs sm">{{ localize('Type') }}</th>
+                                    <th data-breakpoints="xs sm">{{ localize('ShipRokcket No') }}</th>
                                     @if (count($locations) > 0)
                                         <th data-breakpoints="xs sm">{{ localize('Location') }}</th>
                                     @endif
@@ -211,6 +212,17 @@
                                             </span>
                                         </td>
 
+                                        <td>
+                                            @if ($order->shipment_order_id != "")
+                                                {{$order->shipment_order_id}}
+                                            @else
+                                                <span class="badge bg-soft-info rounded-pill text-capitalize" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-whatever="{{$order->id}}" style="cursor: pointer">
+                                                    + Add 
+                                                </span>
+                                            @endif
+
+                                        </td>
+
                                         @if (count($locations) > 0)
                                             <td>
                                                 <span class="badge rounded-pill text-capitalize bg-secondary">
@@ -251,4 +263,28 @@
             </div>
         </div>
     </section>
+    
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+            <h5 class="modal-title">Add ShipRokcket Number</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input type="hidden" id="ship_order_no" value="">
+                <input class="form-control" type="text" id="shipRokcket_no" placeholder="Enter ShipRokcket Number" name="shipRokcket_no">
+                <button class="btn btn-primary mt-4" type="button" onclick="saveShipRokcketNumber()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save me-1"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Save Number
+                </button>
+            </div>
+  
+        </div>
+    </div>
+</div>
 @endsection

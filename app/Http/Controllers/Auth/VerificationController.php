@@ -39,9 +39,9 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+        // $this->middleware('auth');
+        // $this->middleware('signed')->only('verify');
+        // $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
     # Show the verification form. 
@@ -81,6 +81,22 @@ class VerificationController extends Controller
 
         return redirect()->route('customers.dashboard');
     }
+    public function phone_verification_confirmation(Request $request)
+    {
+        $user = User::where('verification_code', $request->verification_code)->first();
+        if ($user != null) {
+            $user->email_or_otp_verified = 1;
+            $user->email_verified_at = Carbon::now();
+            $user->save();
+            auth()->login($user, true);
+            // flash(localize('Your account has been verified successfully'))->success();
+        } else {
+            // flash(localize('Sorry, we could not verify you. Please try again'))->error();
+            return 0;
+        }
+
+        return 1;
+    }
 
     # show phone verification form
     public function verifyPhone()
@@ -93,6 +109,23 @@ class VerificationController extends Controller
         return view('auth.phoneVerify', compact('user'));
     }
 
+    # show phone verification form
+    public function sendotpPhone(Request $request)
+    {
+        $phone = $request->phone;
+        $user = User::where('phone', $phone)->first();
+        if (is_null($user)) {
+            flash(localize('User not found with this phone number'))->error();
+            return 0;
+        }
+
+        $user->verification_code = rand(100000, 999999);
+        $user->save();
+
+        $this->sendOtp($user->phone, $user->verification_code);
+        return 1;
+    }
+
     # send otp
     public function sendOtp($phone, $otp)
     {
@@ -101,8 +134,8 @@ class VerificationController extends Controller
     }
 
     # set as verified
-    public function phone_verification_confirmation(Request $request)
-    {
-        return $this->verification_confirmation($request->verification_code);
-    }
+    // public function phone_verification_confirmation(Request $request)
+    // {
+    //     return $this->verification_confirmation($request->verification_code);
+    // }
 }
