@@ -180,6 +180,39 @@
                                         </td>
                                     @endif
                                 </tr>
+
+                                @if ($item->qty >= 6)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td class="text-nowrap">
+                                            <div class="d-flex">
+                                                <img src="{{ uploadedAsset($product->thumbnail_image) }}"
+                                                    alt="{{ $product->collectLocalization('name') }}"
+                                                    class="img-fluid product-item d-none">
+                                                {{-- <div class="ms-2"> --}}
+                                                <div class="">
+                                                    <span>{{ $product->collectLocalization('name') }}</span>
+                                                    <div>
+                                                        @foreach (generateVariationOptions($item->product_variation->combinations) as $variation)
+                                                            <span class="fs-xs">
+                                                                {{ $variation['name'] }}:
+                                                                @foreach ($variation['values'] as $value)
+                                                                    {{ $value['name'] }}
+                                                                @endforeach
+                                                                @if (!$loop->last)
+                                                                    ,
+                                                                @endif
+                                                            </span>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Free</td>
+                                        <td>{{ (int) ($item->qty / 6) }}</td>
+                                        <td>Free</td>
+                                    </tr>
+                                @endif
                             @endforeach
 
 

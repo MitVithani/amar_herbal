@@ -222,6 +222,56 @@
                                         </td>
 
                                     </tr>
+
+                                    @if ($item->qty >= 6)
+                                        <tr>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar avatar-sm"> <img
+                                                            src="{{ uploadedAsset($product->thumbnail_image) }}"
+                                                            alt="{{ $product->collectLocalization('name') }}"
+                                                            class="rounded-circle">
+                                                    </div>
+                                                    <div class="ms-2">
+                                                        <h6 class="fs-sm mb-0">
+                                                            {{ $product->collectLocalization('name') }}
+                                                        </h6>
+                                                        <div class="text-muted">
+                                                            @foreach (generateVariationOptions($item->product_variation->combinations) as $variation)
+                                                                <span class="fs-xs">
+                                                                    {{ $variation['name'] }}:
+                                                                    @foreach ($variation['values'] as $value)
+                                                                        {{ $value['name'] }}
+                                                                    @endforeach
+                                                                    @if (!$loop->last)
+                                                                        ,
+                                                                    @endif
+                                                                </span>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            <td class="tt-tb-price">
+                                                <span class="fw-bold">Free
+                                                </span>
+                                            </td>
+                                            <td class="fw-bold">{{ (int) ($item->qty / 6) }}</td>
+
+                                            <td class="tt-tb-price text-end">
+                                                @if ($item->refundRequest && $item->refundRequest->refund_status == 'refunded')
+                                                    <span
+                                                        class="badge bg-soft-info rounded-pill text-capitalize">{{ $item->refundRequest->refund_status }}</span>
+                                                @endif
+                                                <span class="text-accent fw-bold">Free
+                                                </span>
+
+                                            </td>
+
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
