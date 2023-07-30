@@ -122,8 +122,39 @@ class VerificationController extends Controller
         $user->verification_code = rand(100000, 999999);
         $user->save();
 
-        $this->sendOtp($user->phone, $user->verification_code);
+        $this->sendOtpRest($user->phone, $user->verification_code);
         return 1;
+    }
+
+    public function sendOtpRest($phone, $otp)
+    {
+        // dd($request->phone());
+        $id = env('TWILIO_SID');
+        $token = env('TWILIO_AUTH_TOKEN');
+        $url = "https://api.twilio.com/2010-04-01/Accounts/$id/SMS/Messages.json";
+        $from = env('FROM_NUMBER');
+        $to = $phone; // twilio trial verified number
+        $body = env('APP_NAME') . " forgot password otp is :" . $otp;
+        $data = array (
+            'From' => $from,
+            'To' => $to,
+            'Body' => $body,
+        );
+        $post = http_build_query($data);
+        $x = curl_init($url);
+        curl_setopt($x, CURLOPT_POST, true);
+        curl_setopt($x, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($x, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($x, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($x, CURLOPT_USERPWD, "$id:$token");
+        curl_setopt($x, CURLOPT_POSTFIELDS, $post);
+        $y = curl_exec($x);
+        curl_close($x);
+        // var_dump($post);
+        // var_dump($y);
+        // dd($otp);
+        return 1;
+
     }
 
     # send otp
