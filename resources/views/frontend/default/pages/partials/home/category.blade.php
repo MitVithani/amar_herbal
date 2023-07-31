@@ -26,19 +26,19 @@
                 <h4 class="d-inline-block px-2 bg-white mb-4">{{ localize('Our Top Categories') }}</h4>
             </div>
             <div class="row g-4 myclass">
-                {{-- @php
+                @php
                     $top_category_ids = getSetting('top_category_ids') != null ? json_decode(getSetting('top_category_ids')) : [];
                     $categories = \App\Models\Category::whereIn('id', $top_category_ids)->get();
-                @endphp --}}
+                @endphp
 
-                {{-- @foreach ($categories as $category) --}}
-                    {{-- @php
+                @foreach ($categories as $category)
+                    @php
                         $productsCount = \App\Models\ProductCategory::where('category_id', $category->id)->count();
-                    @endphp --}}
+                    @endphp
                     <div class="col-md-3" id="mycol">
-                        {{-- <a href="{{ route('products.index') }}?&category_id={{ $category->id }}"> --}}
+                        <a href="{{ route('products.index') }}?&category_id={{ $category->id }}">
                         <div class="gshop-animated-iconbox text-center position-relative overflow-hidden {{--{{ $loop->even ? 'color-2' : '' }}--}}">
-                            <img src="{{ staticAsset('frontend/default/assets/img/cate1.png') }}" class="w-100 rounded-2" alt="cate1">
+                            <img src="{{ uploadedAsset($category->collectLocalization('thumbnail_image'))}}" class="w-100 rounded-2" alt="cate1">
                             {{-- <div class="animated-icon d-inline-flex align-items-center rounded-circle position-relative">
                                 <img src="{{ uploadedAsset($category->collectLocalization('thumbnail_image')) }}"
                                     alt="" class="img-fluid">
@@ -55,28 +55,9 @@
                                 class="explore-btn position-absolute"><i class="fa-solid fa-arrow-up"></i>
                             </a> --}}
                         </div>
-                        {{-- </a> --}}
-                    </div>
-
-                    <div class="col-md-3" id="mycol">
-                        <div class="gshop-animated-iconbox text-center position-relative overflow-hidden">
-                            <img src="{{ staticAsset('frontend/default/assets/img/cate4.png') }}" class="w-100 rounded-2" alt="cate4">
-                        </div>
-                    </div>
-
-                    <div class="col-md-3" id="mycol">
-                        <div class="gshop-animated-iconbox text-center position-relative overflow-hidden">
-                            <img src="{{ staticAsset('frontend/default/assets/img/cate2.png') }}" class="w-100 rounded-2" alt="cate2">
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-3" id="mycol">
-                        <div class="gshop-animated-iconbox text-center position-relative overflow-hidden">
-                            <img src="{{ staticAsset('frontend/default/assets/img/cate3.png') }}" class="w-100 rounded-2" alt="cate3"> 
-                        </div>
-                    </div>
-                    
-                {{-- @endforeach --}}
+                        </a>
+                    </div>                   
+                @endforeach
             </div>
         </div>
     </div>
