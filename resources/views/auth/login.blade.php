@@ -55,7 +55,7 @@
                                     {{-- </span> --}}
                                 </div>
                             </div>
-                            <div class="col-sm-12">
+                            {{-- <div class="col-sm-12">
                                 <div class="input-field check-password">
                                     <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Password') }}</label>
                                     <div class="check-password">
@@ -65,7 +65,7 @@
                                         <span class="eye eye-slash"><i class="fa-solid fa-eye-slash"></i></span>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="d-flex align-items-center justify-content-between mt-4">
