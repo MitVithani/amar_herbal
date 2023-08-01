@@ -179,4 +179,8 @@ class LoginController extends Controller
         flash(localize('Invalid login credentials.'))->error();
         return back()->withInput();
     }
+
+    function admin_login() {
+        return view('auth.admin_login');
+    }
 }
