@@ -76,7 +76,7 @@
                                 </div>
                                 <label for="save-password" class="fs-sm"> {{ localize('Remember me') }}</label>
                             </div>
-                            <a href="{{ route('password.request') }}" class="fs-sm">{{ localize('Forgot Password') }}</a>
+                            {{-- <a href="{{ route('password.request') }}" class="fs-sm">{{ localize('Forgot Password') }}</a> --}}
                         </div>
 
                         {{-- @if (env('DEMO_MODE') == 'On')

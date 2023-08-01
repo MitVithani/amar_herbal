@@ -41,6 +41,7 @@ Route::get('/clear-cache', function() {
 Auth::routes(['verify' => true]);
 
 Route::controller(LoginController::class)->group(function () {
+    Route::get('/admin_login', 'admin_login');
     Route::get('/logout', 'logout')->name('logout');
     Route::get('/social-login/redirect/{provider}', 'redirectToProvider')->name('social.login');
     Route::get('/social-login/{provider}/callback', 'handleProviderCallback')->name('social.callback');
