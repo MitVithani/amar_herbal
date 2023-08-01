@@ -92,7 +92,7 @@
                             class="d-flex align-items-center">
                             <div class="me-2 avatar-icon">
                                 <img src="{{ uploadedAsset($navbarCat->collectLocalization('thumbnail_image')) }}"
-                                    alt="" class="rounded-circle h-100 w-100">
+                                    alt="" class="rounded-2 h-100 w-100">
                             </div>
                             <span>{{ $navbarCat->collectLocalization('name') }}</span>
                         </a>
