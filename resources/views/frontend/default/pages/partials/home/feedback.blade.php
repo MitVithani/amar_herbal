@@ -22,12 +22,12 @@
             </div>
             <div class="col-xl-8">
                 <div class="gshop-feedback-slider-wrapper">
-                    <div class="swiper gshop-feedback-thumb-slider">
+                    <div class="swiper gshop-feedback-slider text-center">
                         <div class="swiper-wrapper">
                             @foreach ($client_feedback as $feedback)
                                 <div class="swiper-slide control-thumb">
                                     <img src="{{ uploadedAsset($feedback->image) }}" alt="clients"
-                                        class="img-fluid rounded-circle">
+                                        class="img-fluid rounded-circle" style="height: 150px;width:150px">
                                 </div>
                             @endforeach
                         </div>
@@ -36,7 +36,7 @@
                         <div class="swiper-wrapper">
                             @foreach ($client_feedback as $feedback)
                                 <div class="swiper-slide feedback-single text-center">
-                                    <p class="mb-5">{{ $feedback->review }}</p>
+                                    <p class="mb-5">{{ $feedback->review }}</p> 
                                     <span
                                         class="clients_name text-dark fw-bold d-block mb-1">{{ $feedback->name }}</span>
                                     <ul class="star-rating fs-sm d-inline-flex align-items-center text-warning">
