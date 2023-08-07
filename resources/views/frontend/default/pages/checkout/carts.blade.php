@@ -23,7 +23,7 @@
     <!--breadcrumb-->
 
     <!--cart section start-->
-    <section class="cart-section ptb-120">
+    <section class="cart-section pt-4">
         <div class="container">
             <div class="rounded-2 overflow-hidden">
                 <table class="cart-table w-100 bg-white">
