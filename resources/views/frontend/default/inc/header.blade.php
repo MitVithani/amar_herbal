@@ -1,3 +1,9 @@
+
+<style>
+    .amar_padding{
+        padding: 0 15px;
+    }       
+</style>
 <header class="gheader position-relative z-2 header-sticky">
     <div class="ghead-topbar bg-primary d-none d-lg-block">
         <div class="container">
@@ -104,8 +110,8 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="gshop-navbar bg-white rounded ps-lg-5 position-relative">
+    <div class="container-fluid">
+        <div class="gshop-navbar bg-white rounded position-relative amar_padding">
             <div class="row align-items-center">
                 <div class="col-xxl-2 col-xl-3 col-md-3 col-5">
                     <a href="{{ route('home') }}" class="logo"><img
@@ -230,7 +236,7 @@
                                             fill="#5D6374" stroke="#5D6374" stroke-width="0.2" />
                                     </svg>
                                 </button>
-                                <div class="user-menu-wrapper">
+                                <div class="user-menu-wrapper" style="left:-80px">
                                     <ul class="user-menu">
                                         @auth
                                             @if (auth()->user()->user_type == 'customer')

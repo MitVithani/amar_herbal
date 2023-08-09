@@ -6,7 +6,7 @@
     }
     }
 </style>
-<section class="pt-80 pb-120">
+<section class="pt-60 pb-120">
     <div class="container">
         <div class="row justify-content-center g-4">
             <!--New Products-->

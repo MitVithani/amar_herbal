@@ -1,6 +1,6 @@
 <section class="position-relative banner-section z-1 overflow-hidden">
     {{-- <img src="{{ staticAsset('frontend/default/assets/img/shapes/bg-shape-4.png') }}" alt="bg shape"
-        class="position-absolute start-0 bottom-0 w-100 z--1"> --}}
+        class="position-absolute start-0 bottom-0 w-100 z--1" style="margin-top:1000px"> --}}
     <div class="container">
         <div class="row g-4">
             <div class="col-xl-8">
