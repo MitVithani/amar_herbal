@@ -1,4 +1,4 @@
-<section class="featured-products pt-80 pb-50 bg-shade position-relative overflow-hidden z-1">
+<section class="featured-products pt-80 pb-50 bg-shade position-relative overflow-hidden z-1" style="height: 1150px;">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/pata-xs.svg') }}" alt="roll"
         class="position-absolute roll-1 z--1" data-parallax='{"y": -120}'>
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/pata-xs.svg') }}" alt="roll"

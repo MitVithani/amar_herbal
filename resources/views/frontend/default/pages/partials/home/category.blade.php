@@ -1,6 +1,7 @@
 <style>
     .myclass{
         display: flex !important;
+        justify-content: center;
         /* justify-content: space-evenly !important; */
         /* align-items: flex-start !important; */
     }
