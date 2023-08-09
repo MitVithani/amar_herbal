@@ -1,6 +1,6 @@
 {{-- <img src="{{ staticAsset('frontend/default/assets/img/shapes/bg-shape-4.png') }}" alt="bg shape"
         class="position-absolute start-0 bottom-0 w-100 z--1">  --}}
-<section class="pt-4 bg-shade position-relative overflow-hidden z-1 feedback-section"   style="margin-top: 10px;">
+<section class="pt-4 bg-shade position-relative overflow-hidden z-1 feedback-section"   style="margin-top: 10px; height:500px">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/bg-shape-5.png') }}" alt="bg shape"
         class="position-absolute start-0 bottom-0 z--1 w-100">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/map-bg.png') }}" alt="map"
