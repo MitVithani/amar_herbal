@@ -1,5 +1,16 @@
 @extends('frontend.default.layouts.master')
 
+<style>
+@media only screen and (max-width: 800px) {
+  #fakeorder {
+    height: 345px;
+  }
+  .col_info{
+    padding-top: 15px;
+  }
+}
+</style>
+
 @section('title')
     {{ localize('Checkout') }} {{ getSetting('title_separator') }} {{ getSetting('system_title') }}
 @endsection
@@ -25,7 +36,7 @@
     <!--checkout form start-->
     <form class="checkout-form" action="{{ route('checkout.complete') }}" method="POST">
         @csrf
-        <div class="checkout-section ptb-120">
+        <div class="checkout-section ptb-10">
             <div class="container">
                 <div class="row g-4">
                     <!-- form data -->
@@ -255,8 +266,15 @@
             
                     <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="justify-content-center col-sm-12 row">
+                    <div class="col-sm-12 row">
                         <div class="col-sm-6">
+                            <div class="row g-3">
+                                <div class="col-sm-12">
+                                    <img src="{{staticAsset('frontend/default/assets/img/FakeOrder.jpg')}}" alt="" height="450px" id="fakeorder">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col_info">
                             <div class="row g-3">
                                 <div class="col-sm-12">
                                     <div class="input-field">
