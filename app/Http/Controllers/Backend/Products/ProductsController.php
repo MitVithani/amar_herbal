@@ -535,6 +535,11 @@ class ProductsController extends Controller
     # delete product
     public function delete($id)
     {
-        #
+        $product = Product::where('id', $id)->first();
+        if (!is_null($product)){
+            $product->delete();
+        }
+        flash(localize('Product has been deleted successfully'))->success();
+        return back();
     }
 }
