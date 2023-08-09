@@ -4,6 +4,9 @@
     .product-listing-box{
         padding: 0% !important;
     }
+    .pt-60{
+        padding-top:60px;
+    }
     }
 </style>
 <section class="pt-60 pb-120">
