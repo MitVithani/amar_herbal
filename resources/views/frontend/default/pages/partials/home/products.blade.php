@@ -5,7 +5,7 @@
         padding: 0% !important;
     }
     .pt-60{
-        padding-top:600px;
+        padding-top:100px;
     }
     }
 </style>
