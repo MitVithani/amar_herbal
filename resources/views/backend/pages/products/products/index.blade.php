@@ -173,6 +173,12 @@
                                                         <i data-feather="eye"
                                                             class="me-2"></i>{{ localize('View Details') }}
                                                     </a>
+                                                    <a href="#" class="dropdown-item confirm-delete"
+                                                        data-href="{{ route('admin.products.delete', $product->id) }}"
+                                                        title="{{ localize('Delete') }}">
+                                                        <i data-feather="trash-2" class="me-2"></i>
+                                                        {{ localize('Delete') }}
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
