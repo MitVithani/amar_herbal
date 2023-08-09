@@ -1,4 +1,17 @@
+
+<div class="row">
+        <marquee direction="left" height="" class="mt-2">
+            <span> પ્રોડક્ટ મળ્યા બાદ કઈ રીતે લેવી  તેની માહિતી માટે 9824848145 પર કૉલ કરવો.</span>
+         </marquee>
+</div>
+<style>
+    .gshop-hero {
+    margin-top: -1px;
+}
+</style>
 <section class="gshop-hero pt-120 bg-white position-relative z-1 overflow-hidden">
+    
+    
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/leaf-shadow.png') }}" alt="leaf"
         class="position-absolute leaf-shape z--1 rounded-circle d-none d-lg-inline">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/mango.png') }}" alt="mango"
