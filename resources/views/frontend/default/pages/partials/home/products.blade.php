@@ -5,11 +5,11 @@
         padding: 0% !important;
     }
     .pt-60{
-        padding-top:60px;
+        padding-top:600px;
     }
     }
 </style>
-<section class="pt-60 pb-120">
+<section class="pt-120 pb-120">
     <div class="container">
         <div class="row justify-content-center g-4">
             <!--New Products-->
