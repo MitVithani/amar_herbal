@@ -1,8 +1,33 @@
-<section class="gshop-hero pt-120 bg-white position-relative z-1 overflow-hidden">
+
+
+<style>
+    .gshop-hero {
+    margin-top: -1px;
+    }
+
+.gshop-hero .leaf-shape {
+    right: 60px;
+    top: 1px;
+    /* bottom: 100px; */
+}
+.f_color{
+    color:#d73535;
+    word-spacing: 3px;
+    font-weight: 500;
+}
+</style>
+<div class="row">
+    <marquee direction="left" height="" class="mt-2">
+        <span class="f_color"> Call 9824848145 for Information on how to take the Product after receiving it.</span>
+    </marquee>
+</div>
+<section class="gshop-hero bg-white position-relative z-1 overflow-hidden" style="padding-top: 60px">
+    
+    
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/leaf-shadow.png') }}" alt="leaf"
         class="position-absolute leaf-shape z--1 rounded-circle d-none d-lg-inline">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/mango.png') }}" alt="mango"
-        class="position-absolute mango z--1" data-parallax='{"y": -120}'>
+        class="position-absolute mango z--1" data-parallax='{"y": -10}'>
 
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/hero-circle-sm.png') }}" alt="circle"
         class="position-absolute hero-circle circle-sm z--1 d-none d-md-inline">

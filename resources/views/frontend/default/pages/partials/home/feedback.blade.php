@@ -1,4 +1,6 @@
-<section class="ptb-120 bg-shade position-relative overflow-hidden z-1 feedback-section">
+{{-- <img src="{{ staticAsset('frontend/default/assets/img/shapes/bg-shape-4.png') }}" alt="bg shape"
+        class="position-absolute start-0 bottom-0 w-100 z--1">  --}}
+<section class="pt-4 bg-shade position-relative overflow-hidden z-1 feedback-section"   style="margin-top: 10px; height:500px">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/bg-shape-5.png') }}" alt="bg shape"
         class="position-absolute start-0 bottom-0 z--1 w-100">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/map-bg.png') }}" alt="map"
@@ -22,12 +24,12 @@
             </div>
             <div class="col-xl-8">
                 <div class="gshop-feedback-slider-wrapper">
-                    <div class="swiper gshop-feedback-thumb-slider">
+                    <div class="swiper gshop-feedback-slider text-center">
                         <div class="swiper-wrapper">
                             @foreach ($client_feedback as $feedback)
                                 <div class="swiper-slide control-thumb">
                                     <img src="{{ uploadedAsset($feedback->image) }}" alt="clients"
-                                        class="img-fluid rounded-circle">
+                                        class="img-fluid rounded-circle" style="height: 150px;width:150px">
                                 </div>
                             @endforeach
                         </div>
@@ -36,7 +38,7 @@
                         <div class="swiper-wrapper">
                             @foreach ($client_feedback as $feedback)
                                 <div class="swiper-slide feedback-single text-center">
-                                    <p class="mb-5">{{ $feedback->review }}</p>
+                                    <p class="mb-5">{{ $feedback->review }}</p> 
                                     <span
                                         class="clients_name text-dark fw-bold d-block mb-1">{{ $feedback->name }}</span>
                                     <ul class="star-rating fs-sm d-inline-flex align-items-center text-warning">

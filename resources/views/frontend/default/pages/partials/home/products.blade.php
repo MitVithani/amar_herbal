@@ -4,9 +4,12 @@
     .product-listing-box{
         padding: 0% !important;
     }
+    .pt-60{
+        padding-top:100px;
+    }
     }
 </style>
-<section class="pt-80 pb-120">
+<section class="pt-4 pb-120">
     <div class="container">
         <div class="row justify-content-center g-4">
             <!--New Products-->

@@ -1,6 +1,7 @@
 <style>
     .myclass{
         display: flex !important;
+        justify-content: center;
         /* justify-content: space-evenly !important; */
         /* align-items: flex-start !important; */
     }
@@ -11,13 +12,16 @@
         border: 2px dashed black;
         border-radius: 5px;
     }
+    .pt-60 {
+        padding-top: 60px;
+    }
     @media only screen and (max-width: 960px) {      
     #mycol{
         padding: 0% !important;
     }
     }
 </style>
-<section class="gshop-category-section bg-white pt-100 position-relative z-1 overflow-hidden">
+<section class="gshop-category-section bg-white pt-4 position-relative z-1 overflow-hidden">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/bg-shape.png') }}" alt="bg shape"
         class="position-absolute bottom-0 start-0 w-100 z--1">
     <div class="container">

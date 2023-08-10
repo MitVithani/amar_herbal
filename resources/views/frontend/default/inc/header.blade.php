@@ -1,3 +1,9 @@
+
+<style>
+    .amar_padding{
+        padding: 0 15px;
+    }       
+</style>
 <header class="gheader position-relative z-2 header-sticky">
     <div class="ghead-topbar bg-primary d-none d-lg-block">
         <div class="container">
@@ -76,13 +82,15 @@
                         @php
                             if (Session::has('currency_code')) {
                                 $currency_code = Session::get('currency_code', Config::get('app.currency_code'));
-                            } else {
-                                $currency_code = env('DEFAULT_CURRENCY');
+                             } else {
+                                $currency_code = getSetting('default_currency');
                             }
                             $currentCurrency = \App\Models\Currency::where('code', $currency_code)->first();
+                            
                         @endphp
 
                         <li class="nav-item dropdown tt-curency-dropdown">
+                            {{-- {{$currentCurrency}} --}}
                             <a href="#" class="dropdown-toggle text-uppercase" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">{{ $currentCurrency->symbol }}
                                 {{ $currentCurrency->code }}</a>
@@ -102,8 +110,8 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="gshop-navbar bg-white rounded ps-lg-5 position-relative">
+    <div class="container-fluid">
+        <div class="gshop-navbar bg-white rounded position-relative amar_padding">
             <div class="row align-items-center">
                 <div class="col-xxl-2 col-xl-3 col-md-3 col-5">
                     <a href="{{ route('home') }}" class="logo"><img
@@ -228,7 +236,7 @@
                                             fill="#5D6374" stroke="#5D6374" stroke-width="0.2" />
                                     </svg>
                                 </button>
-                                <div class="user-menu-wrapper">
+                                <div class="user-menu-wrapper" style="left:-80px">
                                     <ul class="user-menu">
                                         @auth
                                             @if (auth()->user()->user_type == 'customer')
@@ -303,17 +311,17 @@
                                                 class="fw-semibold text-secondary sub-total-price">{{ formatPrice(getSubTotal($carts, false)) }}</span>
                                         </div>
                                         <div class="row align-items-center justify-content-between">
-                                            <div class="col-6">
+                                            <div class="col-12">
                                                 <a href="{{ route('carts.index') }}"
                                                     class="btn btn-secondary btn-md mt-4 w-100"><span
                                                         class="me-2"><i
                                                             class="fa-solid fa-shopping-bag"></i></span>{{ localize('View Cart') }}</a>
                                             </div>
-                                            <div class="col-6">
+                                            {{-- <div class="col-6">
                                                 <a href="{{ route('checkout.proceed') }}"
                                                     class="btn btn-primary btn-md mt-4 w-100"><span class="me-2"><i
                                                             class="fa-solid fa-credit-card"></i></span>{{ localize('Checkout') }}</a>
-                                            </div>
+                                            </div> --}}
 
 
                                         </div>
@@ -377,6 +385,12 @@
                 </div>
             </div>
         </div>
+       
     </div>
+    {{-- <div class="row">
+        <marquee direction="left" height="" class="mt-2">
+            <span> પ્રોડક્ટ મળ્યા બાદ કઈ રીતે લેવી  તેની માહિતી માટે 9824848145 પર કૉલ કરવો.</span>
+         </marquee>
+    </div> --}}
 </header>
 
