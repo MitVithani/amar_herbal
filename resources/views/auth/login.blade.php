@@ -249,11 +249,11 @@
                 data: { phone: phone },
                 dataType: 'JSON',
                 success: function (res) {
-                    // if(res == 0){
-                    //     location.reload();
-                    // }else{
-                    //     alert(res);
-                    // }
+                    if(res == 0){
+                        location.reload();
+                    }else{
+                        // alert(res);
+                    }
                 }
             });
         }
