@@ -248,6 +248,7 @@
                         $('.add-to-cart-btn .add-to-cart-text').html(TT.localize.addToCart);
                         updateCarts(data);
                         notifyMe('success', data.message);
+                        showQuantityInput();
                     }
                 });
 
@@ -398,7 +399,7 @@
     }
 
     // get logistics to check out
-    function getLogistics(city_id) {
+    function getLogistics(country, state) {
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -406,7 +407,7 @@
             url: "{{ route('checkout.getLogistic') }}",
             type: 'POST',
             data: {
-                city_id: city_id
+                country: country
             },
             success: function(data) {
                 $('.checkout-sidebar').empty();
@@ -446,13 +447,6 @@
         // shipping address not selected
         if ($('.checkout-form input[name=shipping_address_id]:checked').length == 0) {
             notifyMe('error', '{{ localize('Please select shipping address') }}');
-            e.preventDefault();;
-            return false;
-        }
-
-        // logistic not selected
-        if ($('.checkout-form input[name=chosen_logistic_zone_id]:checked').length == 0) {
-            notifyMe('error', '{{ localize('Please select logistic') }}');
             e.preventDefault();;
             return false;
         }

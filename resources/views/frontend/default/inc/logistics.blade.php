@@ -1,10 +1,10 @@
-<h4 class="mt-7">{{ localize('Available Logistics') }}</h4>
+{{-- <h4 class="mt-7">{{ localize('Available Logistics') }}</h4>
 @forelse ($logisticZoneCities as $zoneCity)
     <div class="checkout-radio d-flex align-items-center justify-content-between gap-3 bg-white rounded p-4 mt-3">
         <div class="radio-left d-inline-flex align-items-center">
             <div class="theme-radio">
                 <input type="radio" name="chosen_logistic_zone_id" id="logistic-{{ $zoneCity->logistic_zone_id }}"
-                    value="{{ $zoneCity->logistic_zone_id }}">
+                    value="{{ $zoneCity->logistic_zone_id }}" checked>
                 <span class="custom-radio"></span>
             </div>
             <div>
@@ -28,4 +28,6 @@
             </div>
         </div>
     </div>
-@endforelse
+@endforelse --}}
+
+<input type="hidden" name="standard_delivery_charge" value="{{ $standard_delivery_charge }}">

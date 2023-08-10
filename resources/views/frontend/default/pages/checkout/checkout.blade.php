@@ -43,9 +43,9 @@
                                         <div class="tt-address-content">
                                             <input type="radio" class="tt-custom-radio" name="shipping_address_id"
                                                 id="shipping-{{ $address->id }}" value="{{ $address->id }}"
-                                                onchange="getLogistics({{ $address->city_id }})"
+                                                onchange="getLogistics({{ $address->country->name, $address->state->name }})"
                                                 @if ($address->is_default) checked @endif
-                                                data-city_id="{{ $address->city_id }}">
+                                                data-country="{{ $address->country->name }}" data-state="{{ $address->state->name }}">
 
                                             <label for="shipping-{{ $address->id }}"
                                                 class="tt-address-info bg-white rounded p-4 position-relative">
@@ -307,6 +307,11 @@
                 data: { phone: phone },
                 dataType: 'JSON',
                 success: function (res) {
+                    // if(res == 0){
+                    //     alert("Somthing wents wrong. Otp not send ");
+                    // }else{
+                    //     alert(res);
+                    // }
                 }
             });
 

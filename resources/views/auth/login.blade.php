@@ -228,8 +228,8 @@
             if(phonenumber.length  == 0){
                 alert("Please Enter The Phone Number");
             }else{
-                $("#otp_phone").val(phonenumber);
                 SendOtp();
+                $("#otp_phone").val(phonenumber);
                 $("#otpModal").modal('show');
             }
             // $('#login-form').on('submit', function(e) {
@@ -249,6 +249,11 @@
                 data: { phone: phone },
                 dataType: 'JSON',
                 success: function (res) {
+                    // if(res == 0){
+                    //     location.reload();
+                    // }else{
+                    //     alert(res);
+                    // }
                 }
             });
         }

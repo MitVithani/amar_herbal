@@ -78,7 +78,7 @@
                             <button type="button" class="increase">+</button>
                         </div>
 
-                        <button type="submit" id="add-to-cart" onclick="showQuantityInput()" class="btn btn-secondary btn-md add-to-cart-btn"
+                        <button type="submit" id="add-to-cart" class="btn btn-secondary btn-md add-to-cart-btn"
                             @if (!$isVariantProduct && $stock < 1) disabled @endif>
                             <span class="me-2">
                                 <i class="fa-solid fa-bag-shopping"></i>

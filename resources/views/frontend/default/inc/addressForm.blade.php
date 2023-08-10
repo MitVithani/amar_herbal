@@ -126,8 +126,9 @@
          // runs when the document is ready --> for media files
          $(document).ready(function() {
              if ($("input[name='shipping_address_id']").is(':checked')) {
-                 let city_id = $("input[name='shipping_address_id']:checked").data('city_id');
-                 getLogistics(city_id);
+                 let country = $("input[name='shipping_address_id']:checked").data('country');
+                 let state = $("input[name='shipping_address_id']:checked").data('state');
+                 getLogistics(country, state);
              }
          });
 
@@ -156,13 +157,13 @@
          }
 
          //  get states on country change
-         $(document).on('change', '[name=country_id]', function() {
-             var country_id = $(this).val();
-             getStates(country_id);
+         $(document).on('change', '[name=country]', function() {
+             var country = $(this).val();
+             getStates(country);
          });
 
          //  get states
-         function getStates(country_id) {
+         function getStates(country) {
              $.ajax({
                  headers: {
                      'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -170,7 +171,7 @@
                  url: "{{ route('address.getStates') }}",
                  type: 'POST',
                  data: {
-                     country_id: country_id
+                     country: country
                  },
                  success: function(response) {
                      $('[name="state_id"]').html("");

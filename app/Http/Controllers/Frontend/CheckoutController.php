@@ -49,10 +49,30 @@ class CheckoutController extends Controller
     # checkout logistic
     public function getLogistic(Request $request)
     {
-        $logisticZoneCities = LogisticZoneCity::where('city_id', $request->city_id)->distinct('logistic_id')->get();
+        $shippingAmount = 0;
+        $carts = Cart::where('user_id', auth()->user()->id)->where('location_id', session('stock_location_id'))->get();
+        $qty = 0;
+        foreach ($carts as $key => $cart) {
+            $qty += $cart->qty;
+        }
+        if($request->state == 'Gujarat'){
+            if($qty <= 1){
+                $shippingAmount = 70;
+            }
+        }else if($request->country == 'India'){
+            if($qty <= 3){
+                $shippingAmount = 100;
+            }
+        }else{
+            if($qty <= 12){
+                $shippingAmount = 1200;
+            }else if($qty <= 24){
+                $shippingAmount = 3000;
+            }
+        }
         return [
-            'logistics' => getViewRender('inc.logistics', ['logisticZoneCities' => $logisticZoneCities]),
-            'summary'   => getViewRender('pages.partials.checkout.orderSummary', ['carts' => Cart::where('user_id', auth()->user()->id)->where('location_id', session('stock_location_id'))->get()])
+            'logistics' => getViewRender('inc.logistics', ['standard_delivery_charge' => $shippingAmount]),
+            'summary'   => getViewRender('pages.partials.checkout.orderSummary', ['carts' => $carts, 'shippingAmount' => $shippingAmount])
         ];
     }
 
@@ -107,9 +127,8 @@ class CheckoutController extends Controller
                 $orderGroup->total_coupon_discount_amount   = getCouponDiscount(getSubTotal($carts, false), getCoupon());
                 # [done->codes below] increase coupon usage counter after successful order
             }
-            $logisticZone = LogisticZone::where('id', $request->chosen_logistic_zone_id)->first();
             # todo::[for eCommerce] handle exceptions for standard & express
-            $orderGroup->total_shipping_cost                = $logisticZone->standard_delivery_charge;
+            $orderGroup->total_shipping_cost                = $request->standard_delivery_charge;
 
             // to convert input price to base price
             if (Session::has('currency_code')) {
@@ -145,8 +164,8 @@ class CheckoutController extends Controller
                 $order->coupon_discount_amount      = $orderGroup->total_coupon_discount_amount; // todo::[update version] calculate for each vendors 
             }
             $order->total_admin_earnings            = $orderGroup->grand_total_amount;
-            $order->logistic_id                     = $logisticZone->logistic_id;
-            $order->logistic_name                   = optional($logisticZone->logistic)->name;
+            $order->logistic_id                     = '';
+            $order->logistic_name                   = '';
             $order->shipping_delivery_type          = $request->shipping_delivery_type;
 
             if ($request->shipping_delivery_type == getScheduledDeliveryType()) {
