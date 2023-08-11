@@ -50,19 +50,19 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'password' => 'required|string|min:6|confirmed',
+            // 'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
     # make new registration here
     protected function create(array $data)
     {
-        if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        // if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'phone' => validatePhone($data['phone']),
-                'password' => Hash::make($data['password']),
+                'phone' => validatePhone( '+91' . $data['phone']),
+                'password' => '',
             ]);
             // set guest_user_id to user_id from carts 
             if (isset($_COOKIE['guest_user_id'])) {
@@ -84,7 +84,7 @@ class RegisterController extends Controller
                 }
             }
             return $user;
-        }
+        // }
         return null;
     }
 
@@ -92,12 +92,12 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
 
-        if (filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
-            if (User::where('email', $request->email)->first() != null) {
-                flash(localize('Email or Phone already exists.'))->error();
-                return back()->withInput();
-            }
-        }
+        // if (filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+        //     if (User::where('email', $request->email)->first() != null) {
+        //         flash(localize('Email or Phone already exists.'))->error();
+        //         return back()->withInput();
+        //     }
+        // }
 
         if ($request->phone != null) {
             if (User::where('phone', $request->phone)->first() != null) {

@@ -43,8 +43,8 @@
                                     </span>
 
                                     {{-- <span class="login-phone @if (old('login_with') == 'email' || old('login_with') == '') d-none @endif"> --}}
-                                        <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Phone') }}</label>
-                                        <input type="text" id="phone" name="phone" placeholder="+xxxxxxxxxx"
+                                        <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Phone') }}<sup class="text-danger">*</sup></label>
+                                        <input type="text" id="phone" name="phone" placeholder="xxxxxxxxxx"
                                             class="theme-input mb-1" value="{{ old('phone') }}" required>
 
                                         {{-- <small class="">
@@ -146,8 +146,7 @@
                                 <div class="col-sm-12">
                                     <div class="input-field">
                                         <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Phone') }}
-                                            <sup class="text-danger">*</sup>
-                                            <small>({{ localize('Enter phone number with country code') }})</small></label>
+                                            <sup class="text-danger">*</sup></label>
                                         <input type="phone" id="otp_phone" name="otp_phone"
                                             placeholder="{{ localize('Enter your phone number') }}" class="theme-input" required disabled>
                                     </div>

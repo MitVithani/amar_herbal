@@ -39,31 +39,29 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="input-field">
-                                    <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Email') }}<sup
-                                            class="text-danger">*</sup></label>
+                                    <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Email') }}</label>
                                     <input type="email" id="email" name="email"
                                         placeholder="{{ localize('Enter your email') }}" class="theme-input"
-                                        value="{{ old('email') }}" required>
+                                        value="{{ old('email') }}">
                                 </div>
                             </div>
 
                             <div class="col-sm-12">
                                 <div class="input-field">
                                     <label class="fw-bold text-dark fs-sm mb-1">
-                                        @if (getSetting('registration_with') == 'email_and_phone')
+                                        {{-- @if (getSetting('registration_with') == 'email_and_phone') --}}
                                             {{ localize('Phone') }}<sup class="text-danger">*</sup>
-                                        @else
+                                        {{-- @else
                                             {{ localize('Phone') }}
-                                        @endif
-                                        <small>({{ localize('Enter phone number with country code') }})</small>
+                                        @endif --}}
+                                        {{-- <small>({{ localize('Enter phone number with country code') }})</small> --}}
                                     </label>
-                                    <input type="text" id="phone" name="phone" placeholder="+xxxxxxxxxx"
-                                        class="theme-input" value="{{ old('phone') }}"
-                                        @if (getSetting('registration_with') == 'email_and_phone') required @endif>
+                                    <input type="text" id="phone" name="phone" placeholder="xxxxxxxxxx"
+                                        class="theme-input" value="{{ old('phone') }}" required>
                                 </div>
                             </div>
 
-                            <div class="col-sm-12">
+                            {{-- <div class="col-sm-12">
                                 <div class="input-field check-password">
                                     <label class="fw-bold text-dark fs-sm mb-1">{{ localize('Password') }}<sup
                                             class="text-danger">*</sup></label>
@@ -86,7 +84,7 @@
                                         <span class="eye eye-slash"><i class="fa-solid fa-eye-slash"></i></span>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="row g-4 mt-3">
                             <div class="col-sm-12">

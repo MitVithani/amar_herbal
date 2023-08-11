@@ -45,6 +45,7 @@ class AddressController extends Controller
         $address->country_id    = $request->country_id;
         $address->state_id      = $request->state_id;
         $address->city_id       = $request->city_id;
+        $address->pincode       = $request->pincode;
 
         if ($request->is_default == 1) {
             $prevDefault = UserAddress::where('user_id', $userId)->where('is_default', 1)->first();
@@ -86,6 +87,7 @@ class AddressController extends Controller
         $address->country_id    = $request->country_id;
         $address->state_id      = $request->state_id;
         $address->city_id       = $request->city_id;
+        $address->pincode       = $request->pincode;
         if ($request->is_default == 1) {
             $prevDefault = UserAddress::where('user_id', $userId)->where('is_default', 1)->first();
             if (!is_null($prevDefault)) {

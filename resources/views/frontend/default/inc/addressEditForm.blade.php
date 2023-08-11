@@ -52,6 +52,13 @@
                 </div>
             </div>
 
+            <div class="col-sm-6">
+                <div class="label-input-field">
+                    <label>{{ localize('Pincode') }}</label>
+                    <input type="text" placeholder="{{ localize('123456') }}" name="pincode" value="{{ $address->pincode }}"/>
+                </div>
+            </div>
+
             <div class="col-sm-12">
                 <div class="label-input-field">
                     <label>{{ localize('Address') }}</label>

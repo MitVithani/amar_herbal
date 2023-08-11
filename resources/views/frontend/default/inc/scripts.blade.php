@@ -407,7 +407,8 @@
             url: "{{ route('checkout.getLogistic') }}",
             type: 'POST',
             data: {
-                country: country
+                country: country,
+                state: state,
             },
             success: function(data) {
                 $('.checkout-sidebar').empty();

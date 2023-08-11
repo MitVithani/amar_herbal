@@ -9,3 +9,6 @@
 
 <br>
 <strong>{{ localize('Country') }}: </strong> {{ $address->country->name }}
+
+<br>
+<strong>{{ localize('Pincode') }}: </strong> {{ $address->pincode }}

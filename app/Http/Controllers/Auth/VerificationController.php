@@ -133,7 +133,7 @@ class VerificationController extends Controller
         $token = env('TWILIO_AUTH_TOKEN');
         $url = "https://api.twilio.com/2010-04-01/Accounts/$id/Messages.json";
         $from = env('VALID_TWILIO_NUMBER');
-        $to = $phone; // twilio trial verified number
+        $to = '+91' . $phone; // twilio trial verified number
         $body = env('APP_NAME') . " login verification otp is :" . $otp;
         $data = array (
             'From' => $from,

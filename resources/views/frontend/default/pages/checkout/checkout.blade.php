@@ -54,7 +54,7 @@
                                         <div class="tt-address-content">
                                             <input type="radio" class="tt-custom-radio" name="shipping_address_id"
                                                 id="shipping-{{ $address->id }}" value="{{ $address->id }}"
-                                                onchange="getLogistics({{ $address->country->name, $address->state->name }})"
+                                                onchange="getLogistics('{{ $address->country->name }}' , '{{$address->state->name}}')"
                                                 @if ($address->is_default) checked @endif
                                                 data-country="{{ $address->country->name }}" data-state="{{ $address->state->name }}">
 
