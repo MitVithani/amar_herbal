@@ -157,13 +157,13 @@
          }
 
          //  get states on country change
-         $(document).on('change', '[name=country]', function() {
-             var country = $(this).val();
-             getStates(country);
+         $(document).on('change', '[name=country_id]', function() {
+             var country_id = $(this).val();
+             getStates(country_id);
          });
 
          //  get states
-         function getStates(country) {
+         function getStates(country_id) {
              $.ajax({
                  headers: {
                      'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -171,7 +171,7 @@
                  url: "{{ route('address.getStates') }}",
                  type: 'POST',
                  data: {
-                     country: country
+                     country_id: country_id
                  },
                  success: function(response) {
                      $('[name="state_id"]').html("");
